@@ -52,7 +52,7 @@ export const login = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "Username is incorrect",
+        message: "Username or email is incorrect",
       });
     }
 
