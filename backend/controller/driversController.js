@@ -55,3 +55,27 @@ export const findDriver = async (req, res) =>{
     });
   }
 }
+
+export const updateDriver = async (req, res) =>{
+  const driverId = req.params.userId;
+  try {
+    const driver = await DriverModel.findByIdAndUpdate(driverId, req.body);
+
+    if(!driver){
+      return res.status(404).json({
+        success: false,
+        message:"Driver not found"
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Driver updated"
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
