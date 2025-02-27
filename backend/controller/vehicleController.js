@@ -127,3 +127,27 @@ export const findVehicle = async (req, res) =>{
     });
   }
 }
+
+export const updateVehicle = async (req, res) =>{
+  const vehicleId = req.params.id;
+  try {
+    const vehicle = await VehicleModel.findById(vehicleId);
+
+    if(!vehicle){
+      return res.status(404).json({
+        success: false,
+        message:"Vehicle not found"
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Vehicle updated"
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}
