@@ -19,5 +19,5 @@ router.get("/", authenticate, authorizeRole("admin", "superadmin"), getDrivers);
 
 router.get("/:id", authenticate, authorizeRole("admin","superadmin"), findDriver);
 
-router.patch("/:id", authenticate, authorizeRole("admin", "superadmin"), updateDriver);
+router.patch("/:id", authenticate, authorizeRole("admin", "superadmin"),express.json(), updateDriver);
 export default router;
