@@ -18,6 +18,24 @@ export const driverValidationRules = () => [
   body("expiryDate").notEmpty().withMessage("expiryDate is required"),
 ];
 
+//vehicle registration
+
+export const vehicleRegistrationRules = () =>[
+  body("plateNo").notEmpty().withMessage("plateNo is required"),
+  body("owner").notEmpty().withMessage("owner is required"),
+  body("vehicleType").notEmpty().withMessage("vehicleType is required"),
+  body("classification").notEmpty().withMessage("classification is required"),
+  body("make").notEmpty().withMessage("make is required"),
+  body("fuelType").notEmpty().withMessage("fuelType is required"),
+  body("motorNumber").notEmpty().withMessage("motorNumber is required"),
+  body("serialChassisNumber").notEmpty().withMessage("serialChassisNumber is required"),
+  body("series").notEmpty().withMessage("series is required"),
+  body("bodyType").notEmpty().withMessage("bodyType is required"),
+  body("color").notEmpty().withMessage("color is required"),
+  body("yearModel").notEmpty().withMessage("yearModel is required"),
+  body("dateRegistered").notEmpty().withMessage("dateRegistered is required"),
+]
+
 //admin registration validation rules
 export const registrationValidationRules = () => [
   body("username").notEmpty().withMessage("username is required"),

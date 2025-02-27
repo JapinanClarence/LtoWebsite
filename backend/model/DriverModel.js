@@ -1,15 +1,5 @@
 import mongoose from "mongoose";
 
-/*
-*civil status ={
-    0: Single,
-    1: Married
-}
-sex = {
-0: Male,
-1: Female
-}
-*/
 const driverSchema = new mongoose.Schema(
   {
     licenseNo: {
@@ -78,9 +68,23 @@ const driverSchema = new mongoose.Schema(
       type: Date,
       required: [true, "expiryDate is required"],
     },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true }, // Enable virtuals in JSON response
+    toObject: { virtuals: true }, // Enable virtuals when using .toObject()
+  }
 );
+
+// Virtual for full name
+driverSchema.virtual("fullname").get(function () {
+  const middleInitial = this.middleName ? `${this.middleName.charAt(0)}. ` : "";
+  return `${this.firstName} ${middleInitial}${this.lastName}`.trim();
+});
 
 const DriverModel = mongoose.model("Drivers", driverSchema);
 

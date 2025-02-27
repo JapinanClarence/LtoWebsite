@@ -6,6 +6,7 @@ import http from "http";
 //routes
 import driverRoutes from "./routes/driver.js";
 import authRoutes from "./routes/auth.js";
+import vehicleRoutes from "./routes/vehicle.js";
 
 const app = express();
 const server = http.createServer(app); 
@@ -25,6 +26,7 @@ mongoose
 
 //driver route
 app.use("/api/driver/", driverRoutes);
+app.use("/api/vehicle", vehicleRoutes);
 
 app.use("/api/auth/", authRoutes);
 
