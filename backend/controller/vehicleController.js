@@ -41,14 +41,14 @@ export const getVehicle = async (req, res) => {
   try {
     const vehicles = await VehicleModel.find().populate({
       path: "driverDetails",
-      select: "fullname firstName middleName lastName _id",
+      select: "fullname firstName middleName lastName",
     });
 
     const vehicleDetails = vehicles.map((data) => {
       return {
         _id: data._id,
         owner: {
-          _id: data.driverDetails._id,
+          _id: data.driverDetails.id,
           fullName: data.driverDetails.fullname,
         },
         vehicleType: data.vehicleType,
@@ -61,6 +61,7 @@ export const getVehicle = async (req, res) => {
         color: data.color,
         yearModel: data.yearModel,
         dateRegistered: data.dateRegistered,
+        expired: data.expired
       };
     });
 
@@ -75,3 +76,54 @@ export const getVehicle = async (req, res) => {
     });
   }
 };
+
+export const findVehicle = async (req, res) =>{
+  const vehicleId = req.params.id;
+  try {
+    const vehicle = await VehicleModel.findById(vehicleId).populate({
+      path: "driverDetails",
+      select: "fullname firstName middleName lastName",
+    });
+
+    if(!vehicle){
+      return res.status(404).json({
+        success:false,
+        message: "Vehicle not found"
+      })
+    }
+
+    const vehicleDetails = {
+      _id: vehicle._id,
+      plateNo: vehicle.plateNo,
+      fileNo: vehicle.fileNo,
+      owner: {
+        _id: vehicle.driverDetails._id,
+        fullname: vehicle.driverDetails.fullname
+      },
+      encumbrance: vehicle.encumbrance,
+      vehicleType: vehicle.vehicleType,
+      classification: vehicle.classification,
+      make: vehicle.make,
+      fuelType: vehicle.fuelType,
+      motorNumber: vehicle.motorNumber,
+      serialChassisNumber: vehicle.serialChassisNumber,
+      series: vehicle.series,
+      bodyType: vehicle.bodyType,
+      color: vehicle.color,
+      yearModel: vehicle.yearModel,
+      dateRegistered: vehicle.dateRegistered,
+      expired: vehicle.expired
+    }
+
+    res.status(200).json({
+      success: true,
+      data: vehicleDetails
+    })
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+}

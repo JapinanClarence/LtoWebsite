@@ -19,6 +19,10 @@ import mongoose from "mongoose";
  * 3 = CNG
  * 4 = electric
  * 5 = others
+ * 
+ * expired:
+ * 0 = false
+ * 1 = true
  */
 
 const encumbranceSchema = new mongoose.Schema({
@@ -92,6 +96,11 @@ const vehicleSchema = new mongoose.Schema(
         message: "Registration date cannot be in the future.",
       },
     },
+    expired: {
+      type: String, 
+      enum: ["0", "1"],
+      default:"0"
+    }
   },
   {
     timestamps: true,
