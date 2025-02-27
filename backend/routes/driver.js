@@ -1,6 +1,6 @@
 import express from "express";
 import { driverValidationRules, validate } from "../middleware/validator.js";
-import { createDriver, findDriver, getDrivers } from "../controller/driversController.js";
+import { createDriver, findDriver, getDrivers, updateDriver } from "../controller/driversController.js";
 import authenticate, { authorizeRole } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -19,4 +19,5 @@ router.get("/", authenticate, authorizeRole("admin", "superadmin"), getDrivers);
 
 router.get("/:id", authenticate, authorizeRole("admin","superadmin"), findDriver);
 
+router.patch("/:id", authenticate, authorizeRole("admin", "superadmin"), updateDriver);
 export default router;
