@@ -1,12 +1,27 @@
 import mongoose from "mongoose";
 
+const addressSchema = new mongoose.Schema({
+  street: { type: String },
+  barangay: { type: String },
+  municipality: { type: String },
+  province: { type: String },
+});
+
+const birthPlaceSchema = new mongoose.Schema({
+  street: { type: String },
+  barangay: { type: String },
+  municipality: { type: String },
+  province: { type: String },
+});
+
 const driverSchema = new mongoose.Schema(
   {
     licenseNo: {
       type: String,
       required: [true, "licenseNo is required"],
       unique: true,
-    },
+      match: [/^[a-zA-Z0-9]{3}-\d{2}-\d{6}$/, "Invalid license number format"],
+    },    
     firstName: {
       type: String,
       required: [true, "firstName is required"],
@@ -18,26 +33,7 @@ const driverSchema = new mongoose.Schema(
     middleName: {
       type: String,
     },
-    street: {
-      type: String,
-      required: [true, "street is required"],
-    },
-    barangay: {
-      type: String,
-      required: [true, "barangay is required"],
-    },
-    municipality: {
-      type: String,
-      required: [true, "municipality is required"],
-    },
-    province: {
-      type: String,
-      required: [true, "province is required"],
-    },
-    zipCode: {
-      type: String,
-      required: [true, "zipCode is required"],
-    },
+    address: { type: addressSchema, required: [true, "address is required"] },
     nationality: {
       type: String,
       required: [true, "nationality is required"],
@@ -57,7 +53,7 @@ const driverSchema = new mongoose.Schema(
       default: "0",
     },
     birthPlace: {
-      type: String,
+      type: birthPlaceSchema,
       required: [true, "birthPlace is required"],
     },
     issueDate: {
