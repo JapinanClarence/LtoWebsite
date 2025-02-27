@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "email is required"],
     },
     password: {
       type: String,
@@ -26,6 +25,10 @@ const userSchema = new mongoose.Schema(
       enum: ["0", "1", "2"],
       default: "1",
     },
+    isPasswordChange:{
+      type: Boolean,
+      default: false
+    }
   },
   { timestamps: true }
 );

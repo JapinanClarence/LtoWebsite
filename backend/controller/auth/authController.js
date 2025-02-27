@@ -1,3 +1,4 @@
+import DriverModel from "../../model/DriverModel.js";
 import UserModel from "../../model/UserModel.js";
 import jwt from "jsonwebtoken";
 
@@ -5,7 +6,6 @@ const ACCESS_KEY = process.env.ACCESS_TOKEN_SECRET;
 const ACCESS_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION;
 const REFRESH_KEY = process.env.REFRESH_TOKEN_SECRET;
 const REFRESH_EXPIRATION = process.env.REFRESH_TOKEN_EXPIRATION;
-
 
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
@@ -43,20 +43,33 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    const user = await UserModel.findOne({
-      $or: [{ username }, { email: username }],
-    });
+  const { email, password } = req.body;
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "Email or License number is incorrect",
+  try {
+    // Check if email is a license number (Driver)
+    const driver = await DriverModel.findOne({ licenseNo: email });
+
+    let user;
+
+    if (driver) {
+      // If a driver is found, retrieve the associated user account
+      user = await UserModel.findById(driver.userAccount);
+    } else {
+      // Otherwise, check email or email in UserModel
+      user = await UserModel.findOne({
+        $or: [{ email }],
       });
     }
 
-    //compare password
+    // If no user is found, return error
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "Email or license number is incorrect",
+      });
+    }
+
+    // Compare password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       return res.status(401).json({
@@ -65,7 +78,7 @@ export const login = async (req, res) => {
       });
     }
 
-    //generate jwt token
+    // Generate JWT token
     const token = jwt.sign(
       {
         userId: user._id,
@@ -75,16 +88,18 @@ export const login = async (req, res) => {
       ACCESS_KEY,
       { expiresIn: ACCESS_EXPIRATION }
     );
-    //generate refresh token
+
+    // Generate refresh token
     const refreshToken = jwt.sign({ userId: user._id }, REFRESH_KEY, {
       expiresIn: REFRESH_EXPIRATION,
     });
-    //store refresh token to cookie
+
+    // Store refresh token in HTTP-only cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(200).json({
@@ -92,6 +107,7 @@ export const login = async (req, res) => {
       message: "Login successful",
       token,
     });
+
   } catch (err) {
     return res.status(500).json({
       success: false,

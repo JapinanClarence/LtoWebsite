@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 const addressSchema = new mongoose.Schema({
   street: { type: String },
@@ -68,6 +68,11 @@ const driverSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    userAccount :{
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'Users',
+      default: null
+    }
   },
   {
     timestamps: true,
