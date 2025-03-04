@@ -24,7 +24,7 @@ const ViolationSchema = new mongoose.Schema({
   },
   driverId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Driver",
+    ref: "Drivers",
     required: function () {
       return this.driverStatus === 1; // Required only if driverStatus is 1 (Registered)
     },
@@ -78,7 +78,7 @@ const ViolationSchema = new mongoose.Schema({
   },
   vehicleId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Vehicle",
+    ref: "Vehicles",
     required: function () {
       return this.vehicleStatus === 1; // Required only if vehicleStatus is 1 (Registered)
     },
