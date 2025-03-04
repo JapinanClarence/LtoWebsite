@@ -21,7 +21,7 @@ router.get("/", authenticate, getViolations);
 router.get("/:id", authenticate, getViolationById);
 
 // Update a violation (Only Admin or Superadmin)
-router.put("/:id", authenticate, authorizeRole("admin", "superadmin"), express.json(), validateViolation, validate, updateViolation);
+router.patch("/:id", authenticate, authorizeRole("admin", "superadmin"), express.json(), validateViolation, validate, updateViolation);
 
 // Delete a violation (Only Admin or Superadmin)
 router.delete("/:id", authenticate, authorizeRole("admin", "superadmin"), deleteViolation);
