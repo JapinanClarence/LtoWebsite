@@ -2,11 +2,16 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import http from "http"; 
+import dotenv from "dotenv"
+
+//Load environment variables from .env file
+dotenv.config();
 
 //routes
 import driverRoutes from "./routes/driver.js";
 import authRoutes from "./routes/auth.js";
 import vehicleRoutes from "./routes/vehicle.js";
+import violationRoutes from "./routes/violation.js";
 
 const app = express();
 const server = http.createServer(app); 
@@ -27,8 +32,8 @@ mongoose
 //driver route
 app.use("/api/driver/", driverRoutes);
 app.use("/api/vehicle", vehicleRoutes);
-
 app.use("/api/auth/", authRoutes);
+app.use("/api/violation", violationRoutes)
 
 // Handle 404 errors for undefined routes
 app.use((req, res, next) => {
