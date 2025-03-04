@@ -33,6 +33,18 @@ export const vehicleRegistrationRules = () =>[
   body("dateRegistered").notEmpty().withMessage("dateRegistered is required"),
 ]
 
+// driver violation
+export const validateViolation = [
+  body("driverStatus").isIn([0, 1]).withMessage("Invalid driver status"),
+  body("vehicleStatus").isIn([0, 1]).withMessage("Invalid vehicle status"),
+  body("violationName").notEmpty().withMessage("Violation name is required"),
+  body("violationDescription").notEmpty().withMessage("Violation description is required"),
+  body("penalty").isNumeric().withMessage("Penalty must be a number"),
+  body("place").notEmpty().withMessage("Place is required"),
+  body("datetime").isISO8601().withMessage("Invalid date format"),
+  body("expirationDate").isISO8601().withMessage("Invalid expiration date format"),
+];
+
 //admin registration validation rules
 export const registrationValidationRules = () => [
   body("username").notEmpty().withMessage("username is required"),
