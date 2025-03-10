@@ -6,7 +6,7 @@
     "scripts": {
         "build": "npm install",
         "start": "node server",
-        "dev": "node --watch --env-file=.env server"
+        "dev": "node --watch server"
     },
     "keywords": [],
     "author": "",

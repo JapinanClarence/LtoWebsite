@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 import  UserModel  from "../model/UserModel.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // JWT authentication middleware
 export const authenticate = (req, res, next) => {

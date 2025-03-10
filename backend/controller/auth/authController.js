@@ -1,7 +1,9 @@
 import DriverModel from "../../model/DriverModel.js";
 import UserModel from "../../model/UserModel.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.config();
 const ACCESS_KEY = process.env.ACCESS_TOKEN_SECRET;
 const ACCESS_EXPIRATION = process.env.ACCESS_TOKEN_EXPIRATION;
 const REFRESH_KEY = process.env.REFRESH_TOKEN_SECRET;
