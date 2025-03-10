@@ -4,6 +4,7 @@ import driverRoutes from "./driver.js";
 import vehicleRoutes from "./vehicle.js";
 import violationRoutes from "./violation.js";
 import authRoutes from "./auth.js";
+import logRoutes from "./logs.js";
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ router.use("/user", userRoutes);
 router.use("/vehicle", vehicleRoutes);
 router.use("/violation", violationRoutes);
 router.use("/auth", authRoutes);
+router.use("/logs", logRoutes);
 
 // Handle 404 errors for undefined routes
 router.use((req, res, next) => {

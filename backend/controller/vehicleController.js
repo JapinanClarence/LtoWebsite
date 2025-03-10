@@ -1,6 +1,7 @@
 import VehicleModel from "../model/VehicleModel.js";
 import UserModel from "../model/UserModel.js";
 import DriverModel from "../model/DriverModel.js";
+import { logAction } from "../util/logger.js";
 
 export const createVehicle = async (req, res) => {
   const ownerId = req.body.owner;
@@ -23,7 +24,12 @@ export const createVehicle = async (req, res) => {
       });
     }
 
-    await VehicleModel.create(req.body);
+    const vehicle = await VehicleModel.create(req.body);
+
+    await logAction(ownerId, "0", {
+      entityId: vehicle._id,
+      entityType: "Vehicle",
+    });
 
     res.status(201).json({
       success: true,

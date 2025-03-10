@@ -121,19 +121,19 @@ export const updateViolation = async (req, res) => {
     }
 };
 
-// Delete a violation by ID (Only Admin or Superadmin)
-export const deleteViolation = async (req, res) => {
-    try {
-        const violation = await ViolationModel.findByIdAndDelete(req.params.id);
-        if (!violation) {
-            return res.status(404).json({ success: false, message: "Violation not found" });
-        }
+// // Delete a violation by ID (Only Admin or Superadmin)
+// export const deleteViolation = async (req, res) => {
+//     try {
+//         const violation = await ViolationModel.findByIdAndDelete(req.params.id);
+//         if (!violation) {
+//             return res.status(404).json({ success: false, message: "Violation not found" });
+//         }
 
-        res.status(200).json({
-            success: true,
-            message: "Violation deleted successfully"
-        });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
-    }
-};
+//         res.status(200).json({
+//             success: true,
+//             message: "Violation deleted successfully"
+//         });
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: error.message });
+//     }
+// };

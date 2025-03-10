@@ -1,30 +1,30 @@
 import mongoose from "mongoose";
-
-const driverLogSchema = new mongoose.Schema({
+/**
+ * 0 - registered a vehicle
+ * 1 - violation
+ * 2 - accident
+ */
+const driverLogSchema = new mongoose.Schema(
+  {
     driver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Driver",
-        required: true,
-      },
-      activityType: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Drivers",
+      required: true,
+    },
+    type: {
+      type: String,
+      enum: ["0", "1", "2"],
+      required: true,
+    },
+    relatedEntity: {
+      entityId: mongoose.Schema.Types.ObjectId, // Reference to vehicle, violation, or accident
+      entityType: {
         type: String,
-        enum: ["Vehicle Registered", "Violation Received", "Accident Involved"],
-        required: true,
+        enum: ["Vehicle", "Violation", "Accident"],
       },
-      relatedEntity: {
-        entityId: mongoose.Schema.Types.ObjectId, // Reference to vehicle, violation, or accident
-        entityType: {
-          type: String,
-          enum: ["Vehicle", "Violation", "Accident"],
-        },
-      },
-      details: {
-        type: String, // Additional details (e.g., "Registered Toyota Hilux 2023")
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
-})
+    },
+  },
+  { timestamps: true }
+);
 
 export default mongoose.model("DriverLog", driverLogSchema);

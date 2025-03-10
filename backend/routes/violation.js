@@ -4,7 +4,7 @@ import {
   getViolations,
   getViolationById,
   updateViolation,
-  deleteViolation,
+  // deleteViolation,
 } from "../controller/violationController.js";
 import { validateViolation, validate } from "../middleware/validator.js";
 import authenticate, { authorizeRole } from "../middleware/authMiddleware.js";
@@ -23,7 +23,7 @@ violationRouter.get("/:id", authenticate, getViolationById);
 // Update a violation (Only Admin or Superadmin)
 violationRouter.patch("/:id", authenticate, authorizeRole("admin", "superadmin"), express.json(), validateViolation, validate, updateViolation);
 
-// Delete a violation (Only Admin or Superadmin)
-violationRouter.delete("/:id", authenticate, authorizeRole("admin", "superadmin"), deleteViolation);
+// // Delete a violation (Only Admin or Superadmin)
+// violationRouter.delete("/:id", authenticate, authorizeRole("admin", "superadmin"), deleteViolation);
 
 export default violationRouter;
