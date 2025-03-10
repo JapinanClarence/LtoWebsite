@@ -13,6 +13,7 @@ router.use("/user", userRoutes);
 router.use("/vehicle", vehicleRoutes);
 router.use("/violation", violationRoutes);
 router.use("/auth", authRoutes);
+//log routes for admin and driver
 router.use("/logs", logRoutes);
 
 // Handle 404 errors for undefined routes
