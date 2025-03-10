@@ -3,9 +3,9 @@ import { validate, vehicleRegistrationRules } from "../middleware/validator.js";
 import authenticate, { authorizeRole } from "../middleware/authMiddleware.js";
 import { createVehicle, findVehicle, getVehicle } from "../controller/vehicleController.js";
 
-const router = express.Router();
+const vehicleRouter = express.Router();
 
-router.post(
+vehicleRouter.post(
   "/",
   authenticate,
   authorizeRole("admin", "superadmin"),
@@ -15,7 +15,7 @@ router.post(
   createVehicle
 );
 
-router.get("/", authenticate, authorizeRole("admin", "superadmin"), getVehicle);
-router.get("/:id", authenticate, authorizeRole("admin", "superadmin"), findVehicle);
+vehicleRouter.get("/", authenticate, authorizeRole("admin", "superadmin"), getVehicle);
+vehicleRouter.get("/:id", authenticate, authorizeRole("admin", "superadmin"), findVehicle);
 
-export default router;
+export default vehicleRouter;
