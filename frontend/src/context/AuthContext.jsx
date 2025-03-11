@@ -46,6 +46,8 @@ export const AuthProvider = ({ children }) => {
       userId: decoded.userId,
       role: decoded.role,
       username: decoded.username,
+      email: decoded.email,
+      isPasswordChange: decoded.isPasswordChange
     };
     localStorage.setItem("token", newToken);
     localStorage.setItem("userData", JSON.stringify(userData));

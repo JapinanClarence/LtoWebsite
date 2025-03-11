@@ -79,13 +79,15 @@ export const login = async (req, res) => {
         message: "Password is incorrect",
       });
     }
-
+    console.log(user)
     // Generate JWT token
     const token = jwt.sign(
       {
         userId: user._id,
         username: user.username,
         role: user.role,
+        email: user.email,
+        isPasswordChange: user.isPasswordChange
       },
       ACCESS_KEY,
       { expiresIn: ACCESS_EXPIRATION }
@@ -156,6 +158,8 @@ export const refreshAccessToken = async (req, res, next) => {
           userId: currentUser._id,
           username: currentUser.username,
           role: currentUser.role,
+          email: currentUser.email,
+          isPasswordChange: currentUser.isPasswordChange
         },
         ACCESS_KEY, //secret key
         { expiresIn: ACCESS_EXPIRATION } // Token expiration time
