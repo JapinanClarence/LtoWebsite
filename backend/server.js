@@ -13,6 +13,8 @@ import router from "./routes/index.js";
 
 const app = express();
 
+app.use(cors());
+
 //import routes
 app.use("/api", router);
 

@@ -65,7 +65,7 @@ export const login = async (req, res) => {
 
     // If no user is found, return error
     if (!user) {
-      return res.status(404).json({
+      return res.status(401).json({
         success: false,
         message: "Email or license number is incorrect",
       });
