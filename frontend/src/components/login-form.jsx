@@ -1,5 +1,5 @@
 import { GalleryVerticalEnd, EyeOff, Eye, LoaderCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,11 +17,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import apiClient from "@/api/axios";
+import { useAuth } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm({ className, ...props }) {
   const [showPass, setShowPass] = useState(false);
   const [submitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // if user exists navigate to homepage
+  useLayoutEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  });
 
   const tooglePasswordVisibility = () => {
     setShowPass(!showPass);
@@ -41,7 +52,7 @@ export function LoginForm({ className, ...props }) {
       const { data } = await apiClient.post("/auth/login", formData);
       if (data) {
         setIsSubmitting(false);
-        console.log(data);
+        login(data.token);
       }
     } catch (error) {
       const message = error.response;
@@ -124,9 +135,9 @@ export function LoginForm({ className, ...props }) {
                             type={showPass ? "text" : "password"}
                             autoComplete="current-password"
                             className={cn(
-                                "border border-input focus:ring-0",
-                                form.formState.errors.password && "border-red-500"
-                              )}
+                              "border border-input focus:ring-0",
+                              form.formState.errors.password && "border-red-500"
+                            )}
                           />
                           <Button
                             type="button"

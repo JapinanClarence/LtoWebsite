@@ -27,7 +27,7 @@ const Header = () => {
       <div className="h-full flex items-center gap-2">
         <Button
           variant="link"
-          className="md:h-full md:w-60"
+          className="md:h-full md:w-60 text-secondary-foreground"
           onClick={() => {
             document.getElementById("home").scrollIntoView({
               behavior: "smooth",
