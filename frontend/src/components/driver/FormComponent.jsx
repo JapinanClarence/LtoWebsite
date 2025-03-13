@@ -356,12 +356,12 @@ const FormComponent = () => {
           </div>
           <div>
             <Label>Other</Label>
-            <div className="grid md:grid-cols-3 gap-x-3">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-3">
               <FormField
                 control={form.control}
                 name="licenseNo"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="md:col-span-2 lg:col-span-1">
                     <FormLabel className="text-muted-foreground text-sm">
                       License No.
                     </FormLabel>
