@@ -36,7 +36,7 @@ export const createDriver = async (req, res) => {
 
 export const getDrivers = async (req, res) => {
   try {
-    const drivers = await DriverModel.find().lean();
+    const drivers = await DriverModel.find().select("fullname licenseNo firstName lastName middleName sex birthDate civilStatus issueDate expiryDate")
 
     res.status(200).json({
       success: true,

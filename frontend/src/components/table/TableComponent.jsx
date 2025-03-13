@@ -149,7 +149,7 @@ const TableComponent = ({
 
       <div className="rounded-md border flex-1">
         <Table>
-          <TableHeader>
+          <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (

@@ -79,7 +79,7 @@ export const login = async (req, res) => {
         message: "Password is incorrect",
       });
     }
-    console.log(user)
+
     // Generate JWT token
     const token = jwt.sign(
       {
