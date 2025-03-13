@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import DashboardLayout from "./layout/DashboardLayout";
+import DriverPage from "./pages/DriverPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           >
             <Route element={<DashboardLayout />}>
               <Route index element={<HomePage />} />
+              <Route path="/driver" element={<DriverPage />} />
             </Route>
           </Route>
         </Route>

@@ -92,9 +92,9 @@ const data = {
 export function AppSidebar(props) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+      <SidebarHeader >
         <SidebarMenu>
-          <SidebarMenuItem asChild>
+          <SidebarMenuItem>
             <SidebarMenuButton>
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg text-sidebar-primary-foreground">
                 <img src={logo} className="" />
@@ -111,14 +111,14 @@ export function AppSidebar(props) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-    
-        <SidebarContent>
+
+      <SidebarContent>
         <SidebarGroup>
-        <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarMenu className="">
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="#">
+                <a href="/">
                   <SquareTerminal />
                   <span>Dashboard</span>
                 </a>
@@ -126,7 +126,7 @@ export function AppSidebar(props) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="#">
+                <a href="/driver">
                   <User />
                   <span>Manage Drivers</span>
                 </a>
@@ -143,9 +143,9 @@ export function AppSidebar(props) {
           </SidebarMenu>
           {/* <NavMain items={data.navMain} /> */}
           {/* <NavProjects projects={data.projects} /> */}
-          </SidebarGroup>
-        </SidebarContent>
-   
+        </SidebarGroup>
+      </SidebarContent>
+
       <SidebarFooter>
         <NavUser />
       </SidebarFooter>

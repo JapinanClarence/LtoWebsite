@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "@/assets/react.svg";
+import logo from "@/assets/lto.svg";
 import { Button } from "../ui/button";
 import { ArrowBigRight, ArrowDownRight } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header
-      className={`  h-[60px] w-full flex justify-between top-0 left-0 fixed z-50 transition-all duration-300 md:px-5 lg:px-72 ${
+      className={`h-[60px] w-full flex justify-between top-0 left-0 fixed z-50 transition-all duration-300 md:px-5 lg:px-32 ${
         // isScrolled ? "bg-zinc/30 backdrop-blur-md shadow-md" : "bg-transparent"
         isScrolled ? "bg-primary shadow-md" : ""
       }`}
@@ -34,7 +34,8 @@ const Header = () => {
             });
           }}
         >
-         LTO WebSite
+          <img src={logo} alt="" className="size-10" />
+          Land Transportation Office
         </Button>
         {/* <div className="h-full hidden md:inline">
           <Button
