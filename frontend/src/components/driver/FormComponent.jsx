@@ -33,7 +33,7 @@ import { LoaderCircle } from "lucide-react";
 const FormComponent = () => {
   const [submitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const {token} = useAuth();
+  const { token } = useAuth();
   // const [loading, setIsLoading] = useState(true);
   const date = formatDate(Date.now());
 
@@ -63,28 +63,28 @@ const FormComponent = () => {
   });
 
   const onSubmit = async (formData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
       const content = {
         licenseNo: formData.licenseNo,
-        firstName:formData.firstName,
+        firstName: formData.firstName,
         lastName: formData.lastName,
         middleName: formData.middleName,
         birthDate: formData.birthDate,
         sex: formData.sex,
         civilStatus: formData.civilStatus,
-        address:{
+        address: {
           street: formData.street,
           barangay: formData.barangay,
           municipality: formData.municipality,
-          province: formData.province
+          province: formData.province,
         },
         zipCode: formData.zipCode,
-        nationality:formData.nationality,
-        birthPlace:formData.birthPlace,
-        issueDate:formData.issueDate,
-        expiryDate:formData.expiryDate
-      }
+        nationality: formData.nationality,
+        birthPlace: formData.birthPlace,
+        issueDate: formData.issueDate,
+        expiryDate: formData.expiryDate,
+      };
 
       const { data } = await apiClient.post("/driver", content, {
         headers: {
@@ -92,12 +92,11 @@ const FormComponent = () => {
         },
       });
 
-
       if (data.success) {
         toast.success("Driver has been added", {
           description: date,
         });
-        setIsSubmitting(false)
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +114,7 @@ const FormComponent = () => {
           <div>
             <Label>Personal Information</Label>
 
-            <div className="grid md:grid-cols-3 gap-x-3">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-3">
               <FormField
                 control={form.control}
                 name="firstName"
@@ -237,11 +236,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="nationality"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="md:col-span-2 lg:col-span-1">
                     <FormLabel className="text-muted-foreground text-sm">
                       Nationality
                     </FormLabel>
@@ -252,17 +252,16 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
-              
             </div>
           </div>
           <div>
             <Label>Address</Label>
-            <div className="grid md:grid-cols-2 gap-x-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-3">
               <FormField
                 control={form.control}
                 name="street"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="col-span-1 lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Street
                     </FormLabel>
@@ -273,11 +272,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="barangay"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="col-span-1 lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Barangay
                     </FormLabel>
@@ -288,11 +288,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="municipality"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="col-span-1 lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Municipality
                     </FormLabel>
@@ -303,11 +304,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="province"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="col-span-1 lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Province
                     </FormLabel>
@@ -318,11 +320,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="zipCode"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="col-span-1 lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Zip-code
                     </FormLabel>
@@ -333,13 +336,12 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
-            </div>
-            <div className="col-span-3">
+
               <FormField
                 control={form.control}
                 name="birthPlace"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-6">
                     <FormLabel className="text-muted-foreground text-sm">
                       Birthplace
                     </FormLabel>
@@ -355,7 +357,7 @@ const FormComponent = () => {
           <div>
             <Label>Other</Label>
             <div className="grid md:grid-cols-3 gap-x-3">
-            <FormField
+              <FormField
                 control={form.control}
                 name="licenseNo"
                 render={({ field }) => (
@@ -404,7 +406,6 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
-             
             </div>
           </div>
           <div className="space-x-2">
