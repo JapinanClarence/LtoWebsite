@@ -19,13 +19,13 @@ const Header = () => {
 
   return (
     <header
-      className={`h-[60px] w-full flex justify-between top-0 left-0 fixed z-50 transition-all duration-300 md:px-5 lg:px-32 ${
+      className={`h-[60px] w-full flex justify-between top-0 left-0 fixed z-50 transition-all duration-300 px-5 lg:px-32 ${
         // isScrolled ? "bg-zinc/30 backdrop-blur-md shadow-md" : "bg-transparent"
         isScrolled ? "bg-primary shadow-md" : ""
       }`}
     >
-      <div className="h-full flex items-center gap-2">
-        <Button
+      <div className="h-full flex items-center gap-2 text-secondary-foreground text-sm font-medium ">
+        {/* <Button
           variant="link"
           className="md:h-full md:w-60 text-secondary-foreground"
           onClick={() => {
@@ -33,10 +33,10 @@ const Header = () => {
               behavior: "smooth",
             });
           }}
-        >
-          <img src={logo} alt="" className="size-10" />
+        > */}
+          <img src={logo} alt="" className="size-10 " />
           Land Transportation Office
-        </Button>
+        {/* </Button> */}
         {/* <div className="h-full hidden md:inline">
           <Button
             size="lg"
