@@ -6,3 +6,52 @@ export const LoginSchema = z.object({
     message:"Password must be at least 6 characters long"
   }),
 });
+
+export const CreateDriverSchema = z.object({
+  licenseNo: z.string().regex(/^[a-zA-Z0-9]{3}-\d{2}-\d{6}$/, "Invalid license number format"),
+  firstName: z.string().min(1, {
+    message: "Firstname is required"
+  }),
+  middleName: z.string().optional(),
+  lastName: z.string().min(1, {
+    message: "Lastname is required"
+  }),
+  street: z.string().min(1, {
+    message: "Street is required"
+  }),
+  barangay: z.string().min(1, {
+    message: "Barangay is required"
+  }),
+  municipality: z.string().min(1, {
+    message: "Municipality is required"
+  }),
+  province: z.string().min(1, {
+    message: "Province is required"
+  }),
+  zipCode: z.string().min(4, {
+    message: "Zip code must be exactly 4 characters"
+  }).max(4, {
+    message: "Zip code must be exactly 4 characters."
+  }),
+  nationality: z.string().min(1, {
+    message: "Nationality is required"
+  }),
+  sex: z.string().min(1, {
+    message: "Sex is required"
+  }),
+  birthDate: z.string().min(1, {
+    message: "Birthdate is required"
+  }),
+  civilStatus: z.string().min(1, {
+    message: "Civil status is required"
+  }),
+  issueDate: z.string().min(1, {
+    message: "Issue date is required"
+  }),
+  expiryDate: z.string().min(1, {
+    message: "Expiry date is required"
+  }),
+  birthPlace: z.string().min(1, {
+    message: "Birthplace is required"
+  }),
+})

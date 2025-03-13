@@ -167,7 +167,7 @@ export function LoginForm({ className, ...props }) {
                 {submitting ? (
                   <LoaderCircle className="w-6 h-6 text-gray-500 mx-auto animate-spin" />
                 ) : (
-                  "Login"
+                  "Login" 
                 )}
               </Button>
             </div>

@@ -6,6 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const sexMap = createCategoryMap({
   0: "Male",
@@ -21,10 +22,14 @@ const civilStatusMap = createCategoryMap({
 const DriverPage = () => {
   const [driverData, setDriverData] = useState([]);
   const { token } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetchDrivers();
   }, []);
+
+
   const fetchDrivers = async () => {
     try {
       const { data } = await apiClient.get("/driver", {
@@ -49,6 +54,10 @@ const DriverPage = () => {
     }
   };
 
+  const handleAdd = async () =>{
+    navigate(`${location.pathname}/create`)
+  }
+
   return (
     <>
       <section className="text-3xl font-bold">Drivers</section>
@@ -59,6 +68,7 @@ const DriverPage = () => {
           searchPlaceholder={"Search Driver..."}
           filters={["fullname", "licenseNo"]}
           tableColumn={driverColumns}
+          onAdd={handleAdd}
         />
       </section>
     </>

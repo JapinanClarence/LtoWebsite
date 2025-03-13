@@ -7,12 +7,12 @@ const addressSchema = new mongoose.Schema({
   province: { type: String },
 });
 
-const birthPlaceSchema = new mongoose.Schema({
-  street: { type: String },
-  barangay: { type: String },
-  municipality: { type: String },
-  province: { type: String },
-});
+// const birthPlaceSchema = new mongoose.Schema({
+//   street: { type: String },
+//   barangay: { type: String },
+//   municipality: { type: String },
+//   province: { type: String },
+// });
 
 const driverSchema = new mongoose.Schema(
   {
@@ -53,7 +53,7 @@ const driverSchema = new mongoose.Schema(
       default: "0",
     },
     birthPlace: {
-      type: birthPlaceSchema,
+      type: String,
       required: [true, "birthPlace is required"],
     },
     issueDate: {

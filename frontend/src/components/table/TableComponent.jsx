@@ -54,7 +54,8 @@ const TableComponent = ({
   loading,
   rowCount,
   cellCount,
-  showAddButton=false
+  showAddButton=false,
+  onAdd
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -117,7 +118,7 @@ const TableComponent = ({
         />
 
         <div className="flex-wrap-reverse mt-2 space-y-2 md:space-y-0 md:mt-0 md:space-x-2 md:flex md:items-center">
-          <Button className={!showAddButton && "hidden"}>{showAddButton} <Plus/></Button>
+          <Button onClick={onAdd} className={!showAddButton && "hidden"}>{showAddButton} <Plus/></Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="w-full md:w-fit">
