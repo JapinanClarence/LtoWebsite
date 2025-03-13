@@ -114,27 +114,7 @@ const FormComponent = () => {
         <div className="space-y-4">
           <div>
             <Label>Personal Information</Label>
-            <div className="md:w-[32.8%]">
-              <FormField
-                control={form.control}
-                name="licenseNo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-muted-foreground text-sm">
-                      License No.
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder="00L-00-000000"
-                      />
-                    </FormControl>
-                    <FormMessage className="text-xs " />
-                  </FormItem>
-                )}
-              />
-            </div>
+
             <div className="grid md:grid-cols-3 gap-x-3">
               <FormField
                 control={form.control}
@@ -272,6 +252,7 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+              
             </div>
           </div>
           <div>
@@ -373,7 +354,26 @@ const FormComponent = () => {
           </div>
           <div>
             <Label>Other</Label>
-            <div className="grid md:grid-cols-2 gap-x-3">
+            <div className="grid md:grid-cols-3 gap-x-3">
+            <FormField
+                control={form.control}
+                name="licenseNo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-muted-foreground text-sm">
+                      License No.
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="text"
+                        placeholder="00L-00-000000"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs " />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="issueDate"
@@ -404,6 +404,7 @@ const FormComponent = () => {
                   </FormItem>
                 )}
               />
+             
             </div>
           </div>
           <div className="space-x-2">
