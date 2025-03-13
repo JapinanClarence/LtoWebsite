@@ -114,12 +114,12 @@ const FormComponent = () => {
           <div>
             <Label>Personal Information</Label>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-3">
+            <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-x-3">
               <FormField
                 control={form.control}
                 name="firstName"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Firstname
                     </FormLabel>
@@ -134,7 +134,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="middleName"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Middlename
                     </FormLabel>
@@ -149,7 +149,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="lastName"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-2">
                     <FormLabel className="text-muted-foreground text-sm">
                       Lastname
                     </FormLabel>
@@ -165,7 +165,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="sex"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Sex
                     </FormLabel>
@@ -195,7 +195,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="birthDate"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Birthday
                     </FormLabel>
@@ -210,7 +210,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="civilStatus"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Civil Status
                     </FormLabel>
@@ -241,7 +241,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="nationality"
                 render={({ field }) => (
-                  <FormItem className="md:col-span-2 lg:col-span-1">
+                  <FormItem className="md:col-span-2 lg:col-span-3">
                     <FormLabel className="text-muted-foreground text-sm">
                       Nationality
                     </FormLabel>
