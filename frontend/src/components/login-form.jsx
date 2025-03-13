@@ -165,7 +165,7 @@ export function LoginForm({ className, ...props }) {
 
               <Button disabled={submitting} id="submit" className="w-full">
                 {submitting ? (
-                  <LoaderCircle className="w-6 h-6 text-gray-500 mx-auto animate-spin" />
+                  <LoaderCircle className="w-6 h-6 text-primary-foreground mx-auto animate-spin" />
                 ) : (
                   "Login" 
                 )}

@@ -59,7 +59,7 @@ const DriverPage = () => {
   }
 
   return (
-    <>
+    <div className="p-4">
       <section className="text-3xl font-bold">Drivers</section>
       <section>
         <TableComponent
@@ -71,7 +71,7 @@ const DriverPage = () => {
           onAdd={handleAdd}
         />
       </section>
-    </>
+    </div>
   );
 };
 
