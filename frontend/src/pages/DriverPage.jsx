@@ -14,22 +14,21 @@ const sexMap = createCategoryMap({
 });
 
 const civilStatusMap = createCategoryMap({
-  0:"Single",
-  1:"Married",
-  3: "Divorced"
-})
-
+  0: "Single",
+  1: "Married",
+  3: "Divorced",
+});
 
 const DriverPage = () => {
   const [driverData, setDriverData] = useState([]);
   const { token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchDrivers();
   }, []);
-
 
   const fetchDrivers = async () => {
     try {
@@ -46,18 +45,19 @@ const DriverPage = () => {
         issueDate: formatSimpleDate(dData.issueDate),
         expiryDate: formatSimpleDate(dData.expiryDate),
         sex: sexMap.get(dData.sex),
-        civilStatus: civilStatusMap.get(dData.civilStatus)
+        civilStatus: civilStatusMap.get(dData.civilStatus),
       }));
       setDriverData(driverData);
-
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
 
-  const handleAdd = async () =>{
-    navigate(`${location.pathname}/create`)
-  }
+  const handleAdd = async () => {
+    navigate(`${location.pathname}/create`);
+  };
 
   return (
     <div className="p-4">
@@ -70,6 +70,7 @@ const DriverPage = () => {
           filters={["fullname", "licenseNo"]}
           tableColumn={driverColumns}
           onAdd={handleAdd}
+          loading={loading}
         />
       </section>
     </div>

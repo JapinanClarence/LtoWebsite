@@ -39,7 +39,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import TableSkeleton from "@/components/skeleton/TableSkeleton";
+import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 
@@ -48,12 +48,9 @@ const TableComponent = ({
   title,
   filters,
   description,
-  height,
   tableColumn,
   data,
   loading,
-  rowCount,
-  cellCount,
   showAddButton=false,
   onAdd
 }) => {
@@ -166,10 +163,7 @@ const TableComponent = ({
           </TableHeader>
           <TableBody className="">
             {loading ? (
-                <div>
-                    Loading
-                </div>
-            //   <TableSkeleton rowCount={rowCount} cellCount={cellCount} />
+              <TableSkeleton rowCount={5} cellCount={table.getAllColumns().length} />
             ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
