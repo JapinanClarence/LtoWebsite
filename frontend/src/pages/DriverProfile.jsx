@@ -11,7 +11,7 @@ const DriverProfile = () => {
   const navigate = useNavigate();
   const fetchDriver = async () => {
     try {
-      const { data } = await apiClient.get(`/driver/67d38affd914d77c3e405a33`, {
+      const { data } = await apiClient.get(`/driver/${params.id}`, {
         headers: {
           Authorization: token,
         },

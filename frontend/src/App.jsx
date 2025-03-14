@@ -33,7 +33,7 @@ function App() {
               <Route index element={<HomePage />} />
               <Route path="/driver" element={<DriverPage />} />
               <Route path="/driver/create" element={<DriverForm />} />
-              <Route path="/driver/:driverId" element={<DriverProfile />} />
+              <Route path="/driver/:id" element={<DriverProfile />} />
             </Route>
           </Route>
         </Route>
