@@ -10,8 +10,10 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CopyMinus, Edit } from "lucide-react";
 
-export const driverColumns = [
+
+export const driverColumns = (onManage) => [
   {
     accessorKey: "licenseNo",
     header: "License No.",
@@ -62,7 +64,10 @@ export const driverColumns = [
     enableHiding: false,
     cell: ({ row }) => {
       const driver = row.original;
-
+      const handleManage = (e) =>{
+        e.stopPropagation();
+        onManage(driver._id)
+      }
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -74,11 +79,15 @@ export const driverColumns = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(driver.id)}
+              onClick={() => navigator.clipboard.writeText(driver._id)}
             >
               Copy Driver ID
             </DropdownMenuItem>
-            {/* <DropdownMenuSeparator /> */}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleManage}>
+              <Edit />
+              Manage
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

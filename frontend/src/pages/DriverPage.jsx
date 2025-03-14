@@ -39,6 +39,7 @@ const DriverPage = () => {
       });
 
       const driverData = data.data.map((dData) => ({
+        _id:dData._id,
         licenseNo: dData.licenseNo,
         fullname: dData.fullname,
         birthDate: formatSimpleDate(dData.birthDate),
@@ -59,6 +60,10 @@ const DriverPage = () => {
     navigate(`${location.pathname}/create`);
   };
 
+  const onManage = (id) =>{
+
+    navigate(`/driver/${id}`)
+  }
   return (
     <div className="p-4">
       <section className="text-3xl font-bold">Drivers</section>
@@ -71,6 +76,7 @@ const DriverPage = () => {
           tableColumn={driverColumns}
           onAdd={handleAdd}
           loading={loading}
+          onManage={onManage}
         />
       </section>
     </div>

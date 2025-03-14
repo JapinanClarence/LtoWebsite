@@ -52,7 +52,8 @@ const TableComponent = ({
   data,
   loading,
   showAddButton=false,
-  onAdd
+  onAdd,
+  onManage
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -67,7 +68,7 @@ const TableComponent = ({
 
   const table = useReactTable({
     data,
-    columns: tableColumn,
+    columns: tableColumn(onManage),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onPaginationChange: setPagination,
