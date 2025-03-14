@@ -49,7 +49,7 @@ const driverSchema = new mongoose.Schema(
     },
     civilStatus: {
       type: String,
-      enum: ["0", "1"],
+      enum: ["0", "1","2"],
       default: "0",
     },
     birthPlace: {

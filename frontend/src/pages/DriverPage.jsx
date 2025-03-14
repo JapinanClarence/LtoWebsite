@@ -15,7 +15,8 @@ const sexMap = createCategoryMap({
 
 const civilStatusMap = createCategoryMap({
   0:"Single",
-  1:"Married"
+  1:"Married",
+  3: "Divorced"
 })
 
 
