@@ -12,7 +12,7 @@ import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDate } from "@/util/dateFormatter";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Edit, Trash } from "lucide-react";
 
 const sexMap = createCategoryMap({
@@ -31,6 +31,7 @@ const DriverCard = () => {
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
   const [driverData, setDriverData] = useState();
+  const navigate = useNavigate();
   const fetchDriver = async () => {
     try {
       const { data } = await apiClient.get(`/driver/${params.id}`, {
@@ -103,7 +104,7 @@ const DriverCard = () => {
         </div>
       </CardContent>
       <CardFooter className="gap-2 text-sm ">
-        <Button size="sm" className="font-bold" variant="outline">
+        <Button onClick={() => navigate(`/driver/edit/${params.id}`)} size="sm" className="font-bold" variant="outline">
           <Edit />
           Edit
         </Button>

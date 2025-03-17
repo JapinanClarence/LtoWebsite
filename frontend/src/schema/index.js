@@ -30,19 +30,11 @@ export const CreateDriverSchema = z.object({
   province: z.string().min(1, {
     message: "Province is required",
   }),
-  // zipCode: z
-  //   .string()
-  //   .min(4, {
-  //     message: "Zip code must be exactly 4 characters",
-  //   })
-  //   .max(4, {
-  //     message: "Zip code must be exactly 4 characters.",
-  //   }),
   nationality: z.string().min(1, {
     message: "Nationality is required",
   }),
-  sex: z.string().min(1, {
-    message: "Sex is required",
+  sex: z.enum(["0","1"], {
+    required_error: "Sex is required.",
   }),
   birthDate: z.date({
     required_error: "Date of birth is required.",

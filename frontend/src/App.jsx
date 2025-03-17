@@ -7,9 +7,10 @@ import HomePage from "./pages/HomePage";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import DashboardLayout from "./layout/DashboardLayout";
 import DriverPage from "./pages/DriverPage";
-import DriverForm from "./pages/DriverForm";
+import AddDriverForm from "./pages/AddDriverForm";
 import DriverProfile from "./pages/DriverProfile";
 import PageNotFound from "./pages/PageNotFound";
+import EditDriverForm from "./pages/EditDriverForm";
 
 function App() {
   return (
@@ -32,8 +33,9 @@ function App() {
             <Route element={<DashboardLayout />}>
               <Route index element={<HomePage />} />
               <Route path="/driver" element={<DriverPage />} />
-              <Route path="/driver/create" element={<DriverForm />} />
+              <Route path="/driver/create" element={<AddDriverForm />} />
               <Route path="/driver/:id" element={<DriverProfile />} />
+              <Route path="/driver/edit/:id" element={<EditDriverForm />} />
             </Route>
           </Route>
         </Route>

@@ -8,14 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import apiClient from "@/api/axios";
-import { useAuth } from "@/context/AuthContext";
-import { useForm } from "react-hook-form";
-import { CreateDriverSchema } from "@/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "../ui/label";
 import {
   Select,
@@ -27,8 +21,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { formatDate } from "@/util/dateFormatter";
-import { useNavigate } from "react-router-dom";
 import { LoaderCircle, CalendarIcon } from "lucide-react";
 import { format, addMonths, setYear, setMonth } from "date-fns";
 import {
@@ -36,84 +28,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
 import DatePicker from "../calendar/DatePicker";
+import { useNavigate } from "react-router-dom";
 
-const AddForm = () => {
-  const [submitting, setIsSubmitting] = useState(false);
+const FormComponent = ({ onSubmit, form, submitting }) => {
   const navigate = useNavigate();
-  const { token } = useAuth();
-  // const [loading, setIsLoading] = useState(true);
-  const date = formatDate(Date.now());
-
-  const form = useForm({
-    resolver: zodResolver(CreateDriverSchema),
-    defaultValues: {
-      licenseNo: "",
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      street: "",
-      barangay: "",
-      municipality: "",
-      province: "",
-      // zipCode: "",
-      nationality: "",
-      sex: "",
-      birthDate: undefined,
-      civilStatus: "",
-      birthPlace: "",
-      issueDate: undefined,
-      expiryDate: "",
-    },
-  });
-
-  const onSubmit = async (formData) => {
-    setIsSubmitting(true);
-    try {
-      const content = {
-        licenseNo: formData.licenseNo,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        middleName: formData.middleName,
-        birthDate: formData.birthDate,
-        sex: formData.sex,
-        civilStatus: formData.civilStatus,
-        address: {
-          street: formData.street,
-          barangay: formData.barangay,
-          municipality: formData.municipality,
-          province: formData.province,
-        },
-        // zipCode: formData.zipCode,
-        nationality: formData.nationality,
-        birthPlace: formData.birthPlace,
-        issueDate: formData.issueDate,
-        expiryDate: formData.expiryDate,
-      };
-
-      const { data } = await apiClient.post("/driver", content, {
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      if (data.success) {
-        toast.success("Driver has been added", {
-          description: date,
-        });
-        setIsSubmitting(false);
-        form.reset()
-      }
-    } catch (error) {
-      console.log(error);
-      const message = error.response.data.message;
-      setIsSubmitting(false);
-      toast.error(message, {
-        description: `${date}`,
-      });
-    }
-  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -207,7 +126,7 @@ const AddForm = () => {
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value || ""}
                     >
                       <FormControl>
                         <SelectTrigger
@@ -300,7 +219,7 @@ const AddForm = () => {
                     </FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value || ""}
                     >
                       <FormControl>
                         <SelectTrigger
@@ -472,34 +391,6 @@ const AddForm = () => {
                 )}
               />
 
-              {/* <FormField
-                control={form.control}
-                name="zipCode"
-                render={({ field }) => (
-                  <FormItem className="col-span-1 lg:col-span-3">
-                    <FormLabel
-                      className={cn(
-                        "text-muted-foreground",
-                        form.formState.errors.zipCode && "text-red-400"
-                      )}
-                    >
-                      Zip-code
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        type="text"
-                        className={cn(
-                          "text-muted-foreground",
-                          form.formState.errors.zipCode && "border-red-400"
-                        )}
-                      />
-                    </FormControl>
-                    <FormMessage className="text-xs text-red-400" />
-                  </FormItem>
-                )}
-              /> */}
-
               <FormField
                 control={form.control}
                 name="birthPlace"
@@ -629,7 +520,7 @@ const AddForm = () => {
                       Expiration Date
                     </FormLabel>
                     <FormControl>
-                    <Popover>
+                      <Popover>
                         <PopoverTrigger asChild>
                           <FormControl>
                             <Button
@@ -694,4 +585,4 @@ const AddForm = () => {
   );
 };
 
-export default AddForm;
+export default FormComponent;
