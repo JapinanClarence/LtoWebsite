@@ -148,7 +148,7 @@ const TableComponent = ({
 
       <div className="rounded-md  border flex-1">
         <Table>
-          <TableHeader className="">
+          <TableHeader className="text-xs md:text-sm">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -162,7 +162,7 @@ const TableComponent = ({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="">
+          <TableBody className="text-xs md:text-sm">
             {loading ? (
               <TableSkeleton rowCount={5} cellCount={table.getAllColumns().length} />
             ) : table.getRowModel().rows?.length ? (

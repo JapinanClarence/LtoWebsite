@@ -14,7 +14,7 @@ const DriverForm = () => {
       {/* <section className="text-3xl font-bold">Add Driver</section> */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-3xl font-bold">Add Driver</CardTitle>
+          <CardTitle className="text-xl md:text-3xl font-bold">Add Driver</CardTitle>
           <CardDescription>
             Fill in required fields to add driver.
           </CardDescription>

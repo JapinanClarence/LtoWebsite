@@ -66,7 +66,7 @@ const DriverPage = () => {
   }
   return (
     <div className="p-4">
-      <section className="text-3xl font-bold">Drivers</section>
+      <section className="text-xl md:text-3xl font-bold">Drivers</section>
       <section>
         <TableComponent
           showAddButton={"Add Driver"}
