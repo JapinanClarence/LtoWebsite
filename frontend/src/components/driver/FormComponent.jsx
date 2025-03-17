@@ -57,7 +57,7 @@ const FormComponent = () => {
       barangay: "",
       municipality: "",
       province: "",
-      zipCode: "",
+      // zipCode: "",
       nationality: "",
       sex: "",
       birthDate: undefined,
@@ -85,7 +85,7 @@ const FormComponent = () => {
           municipality: formData.municipality,
           province: formData.province,
         },
-        zipCode: formData.zipCode,
+        // zipCode: formData.zipCode,
         nationality: formData.nationality,
         birthPlace: formData.birthPlace,
         issueDate: formData.issueDate,
@@ -359,7 +359,7 @@ const FormComponent = () => {
           </div>
           <div>
             <Label>Address</Label>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-x-3">
               <FormField
                 control={form.control}
                 name="street"
@@ -448,7 +448,7 @@ const FormComponent = () => {
                 control={form.control}
                 name="province"
                 render={({ field }) => (
-                  <FormItem className="col-span-1 lg:col-span-3">
+                  <FormItem className="col-span-1 lg:col-span-2">
                     <FormLabel
                       className={cn(
                         "text-muted-foreground",
@@ -472,7 +472,7 @@ const FormComponent = () => {
                 )}
               />
 
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name="zipCode"
                 render={({ field }) => (
@@ -498,13 +498,13 @@ const FormComponent = () => {
                     <FormMessage className="text-xs text-red-400" />
                   </FormItem>
                 )}
-              />
+              /> */}
 
               <FormField
                 control={form.control}
                 name="birthPlace"
                 render={({ field }) => (
-                  <FormItem className="lg:col-span-6">
+                  <FormItem className="md:col-span-2 lg:col-span-8">
                     <FormLabel
                       className={cn(
                         "text-muted-foreground",

@@ -44,7 +44,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 
 const TableComponent = ({
-  searchPlaceholder,
+  searchPlaceholder = null, 
   title,
   filters,
   description,
@@ -107,12 +107,12 @@ const TableComponent = ({
   return (
     <>
       <Label className="font-semibold">{title}</Label>
-      <div className="md:flex items-center justify-between py-4">
+      <div className={`md:flex items-center  ${searchPlaceholder ? "justify-between  py-4" : "justify-end pb-4"}`}>
         <Input
           placeholder={searchPlaceholder}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className="md:max-w-sm"
+          className={searchPlaceholder ? "md:max-w-sm": "hidden"}
         />
 
         <div className="flex-wrap-reverse mt-2 space-y-2 md:space-y-0 md:mt-0 md:space-x-2 md:flex md:items-center">
@@ -146,7 +146,7 @@ const TableComponent = ({
         </div>
       </div>
 
-      <div className="rounded-md border flex-1">
+      <div className="rounded-md  border flex-1">
         <Table>
           <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (

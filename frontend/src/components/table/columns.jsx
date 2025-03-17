@@ -94,3 +94,21 @@ export const driverColumns = (onManage) => [
     },
   },
 ];
+
+export const driverLogs =  () =>[
+  {
+    accessorKey: "_id",
+    header: "Log ID",
+    cell: ({ row }) => <div className="">{row.getValue("_id")}</div>,
+  },
+  {
+    accessorKey: "type",
+    header: "Type ",
+    cell: ({ row }) => <div className="">{row.getValue("type")}</div>,
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Timestamp",
+    cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
+  },
+]

@@ -1,5 +1,5 @@
 "use client";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import React from "react";
 import Header from "../components/nav/Header";
 import { AppSidebar } from "@/components/nav/AppSidebar";
@@ -18,8 +18,11 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 
 const DashboardLayout = () => {
+  const navigate = useNavigate();
   return (
     <>
       <SidebarProvider>
