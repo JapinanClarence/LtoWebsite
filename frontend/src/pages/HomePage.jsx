@@ -51,10 +51,10 @@ const HomePage = () => {
       <ViolationsChart />
       <section className="flex gap-4 flex-col lg:flex-row">
         <DriverLogs/>
-        <div className="p-5 border w-full lg:w-min rounded-lg ">
+        <div className="p-5 border sm:flex justify-center items-center lg:w-min rounded-lg ">
           <Calendar
             mode="single"
-            className="w-full"
+            className=""
           />
         </div>
       </section>
