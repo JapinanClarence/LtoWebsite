@@ -5,7 +5,7 @@ export const getLogs = async (req, res) => {
  
   try {
     let logs = await DriverLog.find().populate("driver").select("-__v");
-     console.log(logs)
+
     logs = logs.map((log) => {
       return {
         _id: log._id,

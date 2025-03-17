@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { logs } from "@/components/table/columns";
-import TableComponent from "@/components/table/TableComponent";
+import { driverLogs } from "../table/columns";
+import TableComponent from "../table/TableComponent";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDateTime } from "@/util/dateFormatter";
+import { useParams } from "react-router-dom";
 
 const logTypeMap = createCategoryMap({
-    0: "Registration",
-    1: "Violation",
-    2:"Accident"
-})
+  0: "Registration",
+  1: "Violation",
+  2: "Accident",
+});
 
 const DriverLogs = () => {
+  const params = useParams();
   const [logData, setLogData] = useState([]);
-  const { token } = useAuth();
+  const { token, userData } = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await apiClient.get("/logs", {
+        const { data } = await apiClient.get(`/logs/${params.id}`, {
           headers: {
             Authorization: token,
           },
@@ -34,7 +36,6 @@ const DriverLogs = () => {
             type: logTypeMap.get(data.type),
             createdAt: formatSimpleDateTime(data.createdAt),
           }));
-
           setLogData(driverLogData);
         }
       } catch (error) {
@@ -47,12 +48,12 @@ const DriverLogs = () => {
   }, []);
 
   return (
-    <Card className="flex-grow lg:col-span-3  border md:shadow-none">
+    <Card className="lg:col-span-3  border md:shadow-none">
       <CardHeader>
-        <CardTitle className="text-xl md:text-2xl font-bold">Driver Logs</CardTitle>
+        <CardTitle className="text-2xl font-bold">Driver Logs</CardTitle>
       </CardHeader>
       <CardContent>
-        <TableComponent tableColumn={logs} data={logData} />
+        <TableComponent tableColumn={driverLogs} data={logData} />
       </CardContent>
     </Card>
   );
