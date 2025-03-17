@@ -5,7 +5,7 @@ export const driverValidationRules = () => [
   body("firstName").notEmpty().withMessage("firstname is required"),
   body("lastName").notEmpty().withMessage("lastname is required"),
   body("address").notEmpty().withMessage("address is required"),
-  body("zipCode").notEmpty().withMessage("zipCode is required"),
+  // body("zipCode").notEmpty().withMessage("zipCode is required"),
   body("nationality").notEmpty().withMessage("nationality is required"),
   body("sex").notEmpty().withMessage("sex is required"),
   body("birthDate").notEmpty().withMessage("birthDate is required"),
