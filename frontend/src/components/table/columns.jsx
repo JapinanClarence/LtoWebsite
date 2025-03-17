@@ -97,9 +97,9 @@ export const driverColumns = (onManage) => [
 
 export const driverLogs =  () =>[
   {
-    accessorKey: "_id",
+    accessorKey: "id",
     header: "Log ID",
-    cell: ({ row }) => <div className="">{row.getValue("_id")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "type",
@@ -115,9 +115,9 @@ export const driverLogs =  () =>[
 
 export const logs = () =>[
   {
-    accessorKey: "_id",
+    accessorKey: "id",
     header: "Log ID",
-    cell: ({ row }) => <div className="">{row.getValue("_id")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "fullname",

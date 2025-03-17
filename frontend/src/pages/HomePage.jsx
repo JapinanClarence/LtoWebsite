@@ -4,10 +4,9 @@ import { useAuth } from "@/context/AuthContext";
 import StatCard from "@/components/home/StatCard";
 import { Users, Car, ChartSpline, ChartPie } from "lucide-react";
 import { ViolationsChart } from "@/components/home/ViolationsChart";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { logs } from "@/components/table/columns";
-import TableComponent from "@/components/table/TableComponent";
 import { Calendar } from "@/components/ui/calendar";
+import DriverLogs from "@/components/home/DriverLogs";
+
 
 const HomePage = () => {
   const loading = useState(false);
@@ -50,21 +49,12 @@ const HomePage = () => {
       </section>
 
       <ViolationsChart />
-      <section className="flex gap-4">
-        <Card className="flex-grow lg:col-span-3  border md:shadow-none">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Driver Logs</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <TableComponent tableColumn={logs} data={[]} />
-          </CardContent>
-        </Card>
-        <div className="p-5 border  w-min rounded-lg ">
+      <section className="flex gap-4 flex-col lg:flex-row">
+        <DriverLogs/>
+        <div className="p-5 border w-full lg:w-min rounded-lg ">
           <Calendar
             mode="single"
-            // selected={date}
-            // onSelect={setDate}
-            className="w-1/4"
+            className="w-full"
           />
         </div>
       </section>
