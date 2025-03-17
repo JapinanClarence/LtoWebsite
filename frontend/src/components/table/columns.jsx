@@ -112,3 +112,26 @@ export const driverLogs =  () =>[
     cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
   },
 ]
+
+export const logs = () =>[
+  {
+    accessorKey: "_id",
+    header: "Log ID",
+    cell: ({ row }) => <div className="">{row.getValue("_id")}</div>,
+  },
+  {
+    accessorKey: "fullname",
+    header: "Driver",
+    cell: ({ row }) => <div className="">{row.getValue("fullname")}</div>,
+  },
+  {
+    accessorKey: "type",
+    header: "Type ",
+    cell: ({ row }) => <div className="">{row.getValue("type")}</div>,
+  },
+  {
+    accessorKey: "createdAt",
+    header: "Timestamp",
+    cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
+  },
+]
