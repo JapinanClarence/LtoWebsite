@@ -43,9 +43,9 @@ export function DriverChart() {
   return (
     <div className="p-6">
       <div className="items-center pb-4">
-        <h1 className="font-semibold leading-none tracking-tight">Radar Chart - Legend</h1>
+        <h1 className="font-semibold leading-none tracking-tight">Driver Violation & Accidents Overview</h1>
         <p className="text-muted-foreground text-sm">
-          Showing total visitors for the last 6 months
+          Showing violation and accident frequency for the last 6 months
         </p>
       </div>
       <div>
