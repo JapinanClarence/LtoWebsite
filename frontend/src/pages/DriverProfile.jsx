@@ -109,6 +109,10 @@ const DriverProfile = () => {
               <p className="font-semibold w-full">
                 {driverData?.address?.province}
               </p>
+              <h2 className="text-muted-foreground ">Birthplace:</h2>
+              <p className="font-semibold w-full">
+                {driverData?.birthPlace}
+              </p>
               <h2 className="text-muted-foreground ">Issue Date:</h2>
               <p className="font-semibold w-full">
                 {formatSimpleDate(driverData?.issueDate)}
