@@ -39,7 +39,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import DatePicker from "../calendar/DatePicker";
 
-const FormComponent = () => {
+const AddForm = () => {
   const [submitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -694,4 +694,4 @@ const FormComponent = () => {
   );
 };
 
-export default FormComponent;
+export default AddForm;

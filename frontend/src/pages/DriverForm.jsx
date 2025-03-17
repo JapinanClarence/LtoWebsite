@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import React, { useState, useLayoutEffect } from "react";
-import FormComponent from "@/components/driver/FormComponent";
+import AddForm from "@/components/driver/AddForm";
 
 const DriverForm = () => {
   return (
@@ -20,7 +20,7 @@ const DriverForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <FormComponent />
+          <AddForm />
         </CardContent>
       </Card>
     </>
