@@ -34,7 +34,8 @@ const DriverLogs = () => {
             id: data._id,
             fullname: data.driver.fullname,
             type: logTypeMap.get(data.type),
-            createdAt: formatSimpleDateTime(data.createdAt),
+            message:data.message,
+            timestamp: formatSimpleDateTime(data.createdAt),
           }));
           setLogData(driverLogData);
         }

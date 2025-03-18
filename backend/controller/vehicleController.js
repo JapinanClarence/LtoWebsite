@@ -28,6 +28,7 @@ export const createVehicle = async (req, res) => {
 
     await logAction(ownerId, "0", {
       entityId: vehicle._id,
+      message:"Driver registered a vehicle",
       entityType: "Vehicle",
     });
 

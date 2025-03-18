@@ -13,6 +13,7 @@ export const getLogs = async (req, res) => {
             _id: log.driver._id,
             fullname: log.driver.fullname,
         },
+        message:log.message,
         type: log.type,
         relatedEntity: log.relatedEntity,
         createdAt: log.createdAt,

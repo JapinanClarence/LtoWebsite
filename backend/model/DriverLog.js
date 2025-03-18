@@ -16,6 +16,10 @@ const driverLogSchema = new mongoose.Schema(
       enum: ["0", "1", "2"],
       required: true,
     },
+    message:{
+      type:String,
+      required:true,
+    },
     relatedEntity: {
       entityId: mongoose.Schema.Types.ObjectId, // Reference to vehicle, violation, or accident
       entityType: {

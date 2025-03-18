@@ -107,9 +107,14 @@ export const driverLogs =  () =>[
     cell: ({ row }) => <div className="">{row.getValue("type")}</div>,
   },
   {
-    accessorKey: "createdAt",
+    accessorKey: "message",
+    header: "Message ",
+    cell: ({ row }) => <div className="">{row.getValue("message")}</div>,
+  },
+  {
+    accessorKey: "timestamp",
     header: "Timestamp",
-    cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("timestamp")}</div>,
   },
 ]
 
