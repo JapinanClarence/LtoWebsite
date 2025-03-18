@@ -109,9 +109,9 @@ const DriverCard = () => {
           Edit
         </Button>
         <Button
-          className="border-red-400 bg-red-100 text-red-400 font-bold"
+          className="font-bold border border-destructive bg-red-100 text-destructive hover:bg-red-200/70 dark:bg-red-300 dark:hover:bg-red-300/80"
           size="sm"
-          variant="outline"
+          variant=""
         >
           <Trash />
           Delete
