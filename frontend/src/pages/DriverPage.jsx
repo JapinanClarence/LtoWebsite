@@ -48,8 +48,11 @@ const DriverPage = () => {
         expiryDate: formatSimpleDate(dData.expiryDate),
         sex: sexMap.get(dData.sex),
         civilStatus: civilStatusMap.get(dData.civilStatus),
+        isActive: dData.isActive
       }));
-      setActiveDrivers(driverData);
+
+      const active = driverData.filter((data) => data.isActive );
+      setActiveDrivers(active);
       setLoading(false);
     } catch (error) {
       setLoading(false);

@@ -14,6 +14,8 @@ import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import { useNavigate, useParams } from "react-router-dom";
 import { Edit, Trash } from "lucide-react";
+import DeactivateDialog from "./DiactivateDialog";
+import { toast } from "sonner";
 
 const sexMap = createCategoryMap({
     0: "Male",
@@ -31,6 +33,9 @@ const DriverCard = () => {
   const [loading, setLoading] = useState(true);
   const { token } = useAuth();
   const [driverData, setDriverData] = useState();
+  const [showAlert, setShowAlert] = useState(false);
+  const [submitting, setIsSubmitting]  = useState(false);
+
   const navigate = useNavigate();
   const fetchDriver = async () => {
     try {
@@ -54,7 +59,53 @@ const DriverCard = () => {
   useEffect(() => {
     fetchDriver();
   }, []);
+
+
+  const handleDeactivate = () => {
+    setShowAlert(true);
+  };
+
+  const confirmDelete = () => {
+    onDelete(false); // Call the delete function
+    setShowAlert(false); // Close the alert dialog after deleting
+  };
+
+  const cancelDelete = () => {
+    setShowAlert(false); // Close the alert dialog without deleting
+  };
+
+  const onDelete = async (data) => {
+    const driverId = params.id;
+    setIsSubmitting(true); // Ensure UI shows loading state
+  
+    const promise = async () => {
+      try {
+        const response = await apiClient.patch(`/driver/${driverId}/updateStatus`, {
+          isActive: data,
+        }, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        
+        return response.data; // Resolve with data for toast success message
+      } catch (error) {
+        const message = error.response?.data?.message || 'An error occurred';
+        throw new Error(message); // Reject with error for toast error message
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
+  
+    toast.promise(promise(), {
+      loading: 'Loading...',
+      success: `Driver updated successfully`,
+      error: (error) => error.message || 'Failed to update driver',
+    });
+  };
+  
   return (
+    <>
     <Card className="lg:col-span-2 row-span-2 border md:shadow-none">
       <CardHeader className="border-b">
         <CardTitle className="text-3xl font-bold">
@@ -112,12 +163,16 @@ const DriverCard = () => {
           className="font-bold border border-destructive bg-red-100 text-destructive hover:bg-red-200/70 dark:bg-red-300 dark:hover:bg-red-300/80"
           size="sm"
           variant=""
+          onClick={handleDeactivate}
         >
           <Trash />
-          Delete
+          Deactivate
         </Button>
       </CardFooter>
     </Card>
+    {/* shows delete confirmation dialog */}
+    <DeactivateDialog open={showAlert} onOpenChange={setShowAlert} cancelDelete={cancelDelete} confirmDelete={confirmDelete}/>
+    </>
   );
 };
 
