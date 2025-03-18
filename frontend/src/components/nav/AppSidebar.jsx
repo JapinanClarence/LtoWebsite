@@ -6,15 +6,20 @@ import {
   BookOpen,
   Bot,
   Car,
+  Circle,
   Command,
+  Dot,
   Frame,
   GalleryVerticalEnd,
+  List,
   Map,
   PieChart,
   PlaySquare,
+  Plus,
   Settings2,
   SquareTerminal,
   User,
+  Users,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav/NavMain";
@@ -32,6 +37,9 @@ import {
   SidebarRail,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
@@ -92,7 +100,7 @@ const data = {
 export function AppSidebar(props) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader >
+      <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
@@ -125,12 +133,27 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <a href="/driver">
-                  <User />
-                  <span>Manage Drivers</span>
-                </a>
-              </SidebarMenuButton>
+              <SidebarMenuButton>
+                <Users/>
+                Manage Drivers</SidebarMenuButton>
+              <SidebarMenuSub>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton asChild>
+                    <a href="/driver">
+                      <Dot />
+                      <span> Drivers</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+                <SidebarMenuSubItem>
+                  <SidebarMenuSubButton asChild>
+                    <a href="/driver/create">
+                      <Dot />
+                      <span> Add Driver</span>
+                    </a>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              </SidebarMenuSub>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
