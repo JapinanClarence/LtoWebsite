@@ -18,7 +18,6 @@ const HomePage = () => {
           name={"Registered Drivers"}
           value={"130"}
           icon={Users}
-          color={""}
           statuses={[
             { label: "100 Active", color: "#047857", bgColor: "#d1fae5" }, // Green
             { label: "30 Expired", color: "#dc2626", bgColor: "#fee2e2" }, // Red
@@ -28,7 +27,6 @@ const HomePage = () => {
           name={"Registered Vehicles"}
           value={"100"}
           icon={Car}
-          color={""}
           statuses={[
             { label: "87 Active", color: "#047857", bgColor: "#d1fae5" }, // Green
             { label: "13 Expired", color: "#dc2626", bgColor: "#fee2e2" }, // Red
@@ -38,13 +36,11 @@ const HomePage = () => {
           name={"Violations"}
           value={"24,828"}
           icon={ChartSpline}
-          color={""}
         />
         <StatCard
           name={"Accidents"}
           value={"25,010"}
           icon={ChartPie}
-          color={""}
         />
       </section>
 
