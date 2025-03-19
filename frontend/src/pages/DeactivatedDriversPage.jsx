@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { deactivatedDriverColumns } from "@/components/table/columns";
 import TableComponent from "@/components/table/TableComponent";
 import { toast } from "sonner";
-import ActivateDialog from "@/components/drivers/ActivateDialog";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { formatSimpleDate } from "@/util/dateFormatter";
@@ -10,6 +9,7 @@ import { createCategoryMap } from "@/util/categoryMap";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import ConfirmationDIalog from "@/components/dialog/ConfirmationDIalog";
 
 const sexMap = createCategoryMap({
   0: "Male",
@@ -135,12 +135,15 @@ const DeactivatedDriversPage = () => {
           onAction={handleActivate}
         />
       </section>
-
-      <ActivateDialog
+      <ConfirmationDIalog
         open={showAlert}
         onOpenChange={setShowAlert}
-        cancelActivate={cancelActivate}
-        confirmActivate={confirmActivate}
+        cancel={cancelActivate}
+        confirm={confirmActivate}
+        title={"Are you sure?"}
+        description={
+          "This action cannot be undone. This will activate the driver."
+        }
       />
     </div>
   );
