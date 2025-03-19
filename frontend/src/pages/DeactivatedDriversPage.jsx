@@ -106,7 +106,7 @@ const DeactivatedDriversPage = () => {
 
     toast.promise(promise(), {
       loading: "Loading...",
-      success: `Driver activated successfully`,
+      success: `Driver activated`,
       error: (error) => error.message || "Failed to update driver",
     });
   };

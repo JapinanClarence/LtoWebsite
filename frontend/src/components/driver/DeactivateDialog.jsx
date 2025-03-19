@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+
 const DeactivateDialog = ({ open, onOpenChange, cancelDelete, confirmDelete }) => {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>

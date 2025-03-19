@@ -56,7 +56,8 @@ const DriversTable = ({
   loading,
   onNavigate,
   onAdd,
-  onAction,
+  onManage,
+  onDelete
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -71,7 +72,7 @@ const DriversTable = ({
 
   const table = useReactTable({
     data,
-    columns: tableColumn(onAction),
+    columns: tableColumn(onManage, onDelete),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onPaginationChange: setPagination,
