@@ -78,12 +78,12 @@ const DriverPage = () => {
           </TabsList>
           <TabsContent value="account" className="">
             <TableComponent
-              // showAddButton={"Add Driver"}
+              showAddButton={"Add Driver"}
               data={activeDrivers}
               searchPlaceholder={"Search Driver..."}
               filters={["fullname", "licenseNo"]}
               tableColumn={driverColumns}
-              // onAdd={handleAdd}
+              onAdd={handleAdd}
               loading={loading}
               onManage={onManage}
             />

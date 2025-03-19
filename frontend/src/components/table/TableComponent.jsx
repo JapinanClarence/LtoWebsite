@@ -44,16 +44,16 @@ import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 
 const TableComponent = ({
-  searchPlaceholder = null, 
+  searchPlaceholder = null,
   title,
   filters,
   description,
   tableColumn,
   data,
   loading,
-  showAddButton=false,
+  showAddButton = false,
   onAdd,
-  onManage
+  onManage,
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -112,14 +112,27 @@ const TableComponent = ({
           placeholder={searchPlaceholder}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className={searchPlaceholder ? "md:max-w-sm": "hidden"}
+          className={
+            searchPlaceholder
+              ? "hidden md:inline md:max-w-sm flex-shrink"
+              : "hidden"
+          }
         />
 
-        <div className="flex-wrap-reverse mt-2 space-y-2 md:space-y-0 md:mt-0 md:space-x-2 md:flex md:items-center">
-          <Button onClick={onAdd} className={!showAddButton ? "hidden" : "w-full md:w-min"}>{showAddButton} <Plus/></Button>
+        <div className="flex gap-2 justify-end md:justify-normal md:items-center">
+          <Button
+            onClick={onAdd}
+            className={
+              !showAddButton ? "hidden" : "w-min flex items-center gap-2"
+            }
+          >
+            <Plus />
+            <span className="hidden lg:inline">{showAddButton}</span>
+          </Button>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full md:w-fit">
+              <Button variant="outline" className="w-fit">
                 <Settings2 className="mr-2 h-4 w-4" /> View
               </Button>
             </DropdownMenuTrigger>
@@ -146,9 +159,9 @@ const TableComponent = ({
         </div>
       </div>
 
-      <div className="rounded-md  border flex-1">
+      <div className="rounded-md  border flex-1 overflow-hidden">
         <Table>
-          <TableHeader className="text-xs md:text-sm">
+          <TableHeader className="text-xs md:text-sm bg-muted">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -164,7 +177,10 @@ const TableComponent = ({
           </TableHeader>
           <TableBody className="text-xs md:text-sm">
             {loading ? (
-              <TableSkeleton rowCount={5} cellCount={table.getAllColumns().length} />
+              <TableSkeleton
+                rowCount={5}
+                cellCount={table.getAllColumns().length}
+              />
             ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow

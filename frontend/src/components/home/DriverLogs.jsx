@@ -47,14 +47,10 @@ const DriverLogs = () => {
   }, []);
 
   return (
-    <Card className="flex-grow lg:col-span-3   md:border md:shadow-none">
-      <CardHeader className="p-0 md:p-6">
-        <CardTitle className="text-xl md:text-2xl font-bold">Driver Logs</CardTitle>
-      </CardHeader>
-      <CardContent className="p-0 md:p-6">
-        <TableComponent tableColumn={logs} data={logData} />
-      </CardContent>
-    </Card>
+    <div className="w-full">
+      <TableComponent tableColumn={logs} data={logData} />
+    </div>
+    
   );
 };
 

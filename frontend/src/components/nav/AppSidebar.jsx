@@ -133,9 +133,18 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="/driver">
+                  <Users />
+                  <span>Drivers</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            {/* <SidebarMenuItem>
               <SidebarMenuButton>
-                <Users/>
-                Manage Drivers</SidebarMenuButton>
+                <Users />
+                Drivers
+              </SidebarMenuButton>
               <SidebarMenuSub>
                 <SidebarMenuSubItem>
                   <SidebarMenuSubButton asChild>
@@ -154,7 +163,7 @@ export function AppSidebar(props) {
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               </SidebarMenuSub>
-            </SidebarMenuItem>
+            </SidebarMenuItem> */}
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <a href="#">
