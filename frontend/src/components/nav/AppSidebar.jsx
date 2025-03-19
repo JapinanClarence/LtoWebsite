@@ -17,7 +17,10 @@ import {
   PlaySquare,
   Plus,
   Settings2,
+  SquareActivity,
+  SquareChartGantt,
   SquareTerminal,
+  TriangleAlert,
   User,
   Users,
 } from "lucide-react";
@@ -169,6 +172,22 @@ export function AppSidebar(props) {
                 <a href="#">
                   <Car />
                   <span>Manage Vehicles</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="#">
+                  <SquareChartGantt />
+                  <span>Manage Violations</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <a href="#">
+                  <SquareActivity />
+                  <span>Manage Accidents</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
