@@ -70,11 +70,6 @@ export const deactivatedDriverColumns = (onAction) => [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(driver._id)}
-            >
-              Copy Driver ID
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleManage}>
               Activate
@@ -147,13 +142,13 @@ export const driverColumns = (onManage, onDelete) => [
               <DotsHorizontalIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent className="text-xs" align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
+            {/* <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(driver._id)}
             >
               Copy Driver ID
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuItem onClick={handleManage}>Manage</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleDelete}>
