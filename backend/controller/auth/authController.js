@@ -49,8 +49,7 @@ export const login = async (req, res) => {
 
   try {
     // Check if email is a license number (Driver)
-    const driver = await DriverModel.findOne({ licenseNo: email });
-    console.log(driver, req.body)
+    const driver = await DriverModel.findOne({ licenseNo: email, isActive:true });
 
     let user;
 

@@ -8,6 +8,9 @@ import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ActiveTab from "@/components/drivers/ActiveTab";
+import InactiveTab from "@/components/drivers/InactiveTab";
+import DriversTable from "@/components/drivers/DriversTable";
 
 const sexMap = createCategoryMap({
   0: "Male",
@@ -21,7 +24,7 @@ const civilStatusMap = createCategoryMap({
 });
 
 const DriverPage = () => {
-  const [activeDrivers, setActiveDrivers] = useState([]);
+  const [driverData, setDriverData] = useState([]);
   const { token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,11 +51,12 @@ const DriverPage = () => {
         expiryDate: formatSimpleDate(dData.expiryDate),
         sex: sexMap.get(dData.sex),
         civilStatus: civilStatusMap.get(dData.civilStatus),
-        isActive: dData.isActive
+        isActive: dData.isActive,
       }));
 
-      const active = driverData.filter((data) => data.isActive );
-      setActiveDrivers(active);
+      const active = driverData.filter((data) => data.isActive);
+      setDriverData(active);
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -67,29 +71,23 @@ const DriverPage = () => {
   const onManage = (id) => {
     navigate(`/driver/${id}`);
   };
+
+  const handleNavigate =  () =>{
+    navigate(`${location.pathname}/inactive`);
+  }
   return (
     <div className="p-4">
-      <section className="text-xl md:text-3xl font-bold mb-5">Drivers</section>
+      <header className="text-xl md:text-3xl font-bold mb-5">Drivers</header>
       <section>
-        <Tabs defaultValue="account" className="">
-          <TabsList className="grid grid-cols-2 w-fit">
-            <TabsTrigger value="account">Active Drivers</TabsTrigger>
-            <TabsTrigger value="password">Deactivated Drivers</TabsTrigger>
-          </TabsList>
-          <TabsContent value="account" className="">
-            <TableComponent
-              showAddButton={"Add Driver"}
-              data={activeDrivers}
-              searchPlaceholder={"Search Driver..."}
-              filters={["fullname", "licenseNo"]}
-              tableColumn={driverColumns}
-              onAdd={handleAdd}
-              loading={loading}
-              onManage={onManage}
-            />
-          </TabsContent>
-          <TabsContent value="password">Tab 2</TabsContent>
-        </Tabs>
+        <DriversTable
+          data={driverData}
+          filters={["fullname", "licenseNo"]}
+          tableColumn={driverColumns}
+          onAdd={handleAdd}
+          loading={loading}
+          onAction={onManage}
+          onNavigate={handleNavigate}
+        />
       </section>
     </div>
   );

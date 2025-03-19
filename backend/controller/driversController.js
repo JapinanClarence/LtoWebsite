@@ -53,7 +53,7 @@ export const getDrivers = async (req, res) => {
 export const findDriver = async (req, res) => {
   const driverId = req.params.id;
   try {
-    const driver = await DriverModel.findById(driverId).select("fullname licenseNo firstName lastName middleName sex birthDate nationality civilStatus issueDate expiryDate address zipCode birthPlace");
+    const driver = await DriverModel.findById(driverId).select("fullname licenseNo firstName lastName middleName sex birthDate nationality civilStatus issueDate expiryDate address isActive birthPlace");
 
     if (!driver) {
       return res.status(404).json({
@@ -98,9 +98,9 @@ export const updateDriver = async (req, res) => {
   }
 };
 
-export const deactivateDriver = async (req, res) => {
+export const updateDriverStatus = async (req, res) => {
   const driverId = req.params.id;
-  console.log(req)
+  console.log(req.body)
   try {
     const driver = await DriverModel.findByIdAndUpdate(
       driverId,

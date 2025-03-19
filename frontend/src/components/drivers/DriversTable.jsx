@@ -29,6 +29,7 @@ import {
   LoaderCircle,
   Plus,
   Settings2,
+  Trash,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -43,7 +44,7 @@ import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 
-const TableComponent = ({
+const DriversTable = ({
   searchPlaceholder = null,
   title,
   filters,
@@ -51,7 +52,7 @@ const TableComponent = ({
   tableColumn,
   data,
   loading,
-  showAddButton = false,
+  onNavigate,
   onAdd,
   onAction,
 }) => {
@@ -107,30 +108,35 @@ const TableComponent = ({
   return (
     <>
       <Label className="font-semibold">{title}</Label>
-      <div className={`md:flex items-center  ${searchPlaceholder ? "justify-between  py-4" : "justify-end pb-4"}`}>
+      <div
+        className={`md:flex items-center justify-between  py-4
+        `}
+      >
         <Input
-          placeholder={searchPlaceholder}
+          placeholder={"Search Driver..."}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className={
-            searchPlaceholder
-              ? "hidden md:inline md:max-w-sm flex-shrink"
-              : "hidden"
-          }
+          className={"hidden md:inline md:max-w-sm flex-shrink"}
         />
 
         <div className="flex gap-2 justify-end md:justify-normal md:items-center">
           <Button
             onClick={onAdd}
             size="sm"
-            className={
-              !showAddButton ? "hidden" : "w-min flex items-center gap-2"
-            }
+            className={"w-min flex items-center gap-2"}
           >
             <Plus />
-            <span className="hidden lg:inline">{showAddButton}</span>
+            <span className="hidden lg:inline">{"Add Driver"}</span>
           </Button>
-
+          <Button
+            onClick={onNavigate}
+            variant="outline"
+            size="sm"
+            className={"w-min flex items-center gap-2"}
+          >
+            <Trash />
+            <span className="hidden lg:inline">{"Bin"}</span>
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button size="sm" variant="outline" className="w-fit">
@@ -247,4 +253,4 @@ const TableComponent = ({
   );
 };
 
-export default TableComponent;
+export default DriversTable;

@@ -14,7 +14,7 @@ import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import { useNavigate, useParams } from "react-router-dom";
 import { Edit, Trash } from "lucide-react";
-import DeactivateDialog from "./DiactivateDialog";
+import DeactivateDialog from "./DeactivateDialog";
 import { toast } from "sonner";
 
 const sexMap = createCategoryMap({
@@ -94,6 +94,7 @@ const DriverCard = () => {
         throw new Error(message); // Reject with error for toast error message
       } finally {
         setIsSubmitting(false);
+        navigate(-1)
       }
     };
   
@@ -155,7 +156,7 @@ const DriverCard = () => {
         </div>
       </CardContent>
       <CardFooter className="gap-2 text-sm ">
-        <Button onClick={() => navigate(`/driver/edit/${params.id}`)} size="sm" className="font-bold" variant="outline">
+        <Button onClick={() => navigate(`/driver/${params.id}/edit`)} size="sm" className="font-bold" variant="outline">
           <Edit />
           Edit
         </Button>
