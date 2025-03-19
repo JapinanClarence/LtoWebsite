@@ -115,7 +115,7 @@ const DeactivatedDriversPage = () => {
       <header className="text-xl md:text-3xl font-bold mb-5">
         Deleted Drivers
       </header>
-      <div className="px-4 pt-4 md:px-0 md:pt-0">
+      <div className=" pt-4 md:px-0 md:pt-0">
         <Button
           variant="outline"
           className="shadow-none"
