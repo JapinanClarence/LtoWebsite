@@ -1,7 +1,7 @@
 import App from "./App.jsx";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "./components/theme-provider.jsx";
+import { ThemeProvider } from "./components/theme/theme-provider.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import React from "react";
 import "./index.css";

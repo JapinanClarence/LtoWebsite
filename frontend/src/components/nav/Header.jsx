@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "@/assets/lto.svg";
 import { Button } from "../ui/button";
 import { ArrowBigRight, ArrowDownRight } from "lucide-react";
-import { ModeToggle } from "../mode-toggle";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
