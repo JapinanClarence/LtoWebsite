@@ -156,14 +156,12 @@ const DriverCard = () => {
         </div>
       </CardContent>
       <CardFooter className="gap-2 text-sm ">
-        <Button onClick={() => navigate(`/driver/${params.id}/edit`)} size="sm" className="font-bold" variant="outline">
+        <Button onClick={() => navigate(`/driver/${params.id}/edit`)} size="sm" className="font-semibold" variant="outline">
           <Edit />
           Edit
         </Button>
         <Button
-          className="font-bold border border-destructive bg-red-100 text-destructive hover:bg-red-200/70 dark:bg-red-300 dark:hover:bg-red-300/80"
-          size="sm"
-          variant=""
+          className="font-semibold border border-destructive bg-red-100 text-destructive hover:bg-red-200/70 dark:bg-red-300 dark:hover:bg-red-300/80"
           onClick={handleDeactivate}
         >
           <Trash />

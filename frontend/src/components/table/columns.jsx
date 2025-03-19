@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyMinus, Edit, Plus } from "lucide-react";
+import { DataTableColumnHeader } from "./DataTableColumnHeader";
 
 export const deactivatedDriverColumns = (onAction) => [
   {
@@ -20,17 +21,7 @@ export const deactivatedDriverColumns = (onAction) => [
   },
   {
     accessorKey: "fullname",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Fullname
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (<DataTableColumnHeader column={column} title={"Fullname"} />),
     cell: ({ row }) => <div className="">{row.getValue("fullname")}</div>,
   },
   {
@@ -102,17 +93,7 @@ export const driverColumns = (onAction) => [
   },
   {
     accessorKey: "fullname",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Fullname
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (<DataTableColumnHeader column={column} title={"Fullname"} />),
     cell: ({ row }) => <div className="">{row.getValue("fullname")}</div>,
   },
   {

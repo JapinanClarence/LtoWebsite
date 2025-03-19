@@ -62,7 +62,6 @@ const AddDriverForm = () => {
           municipality: formData.municipality,
           province: formData.province,
         },
-        // zipCode: formData.zipCode,
         nationality: formData.nationality,
         birthPlace: formData.birthPlace,
         issueDate: formData.issueDate,

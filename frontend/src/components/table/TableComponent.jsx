@@ -42,6 +42,8 @@ import {
 import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
+import { DataTableViewOptions } from "./DataTableViewOptions";
+import { DataTablePagination } from "./DataTablePagination";
 
 const TableComponent = ({
   searchPlaceholder = null,
@@ -60,7 +62,7 @@ const TableComponent = ({
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
-    pageSize: 5, // Default rows per page
+    pageSize: 10, // Default rows per page
   });
   const [globalFilter, setGlobalFilter] = React.useState("");
   // Define the columns where you want to apply the global filter
@@ -78,7 +80,6 @@ const TableComponent = ({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onGlobalFilterChange: setGlobalFilter,
-    pageCount: Math.ceil(data.length / pagination.pageSize),
     globalFilterFn: (row, columnIds, filterValue) => {
       // This function will filter across multiple columns
       return filterColumns.some((columnId) => {
@@ -96,18 +97,14 @@ const TableComponent = ({
       globalFilter,
     },
   });
-
-  const handleRowsPerPageChange = (size) => {
-    setPagination((prev) => ({
-      ...prev,
-      pageSize: size,
-      pageIndex: 0, // Reset to first page when page size changes
-    }));
-  };
   return (
     <>
       <Label className="font-semibold">{title}</Label>
-      <div className={`md:flex items-center  ${searchPlaceholder ? "justify-between  py-4" : "justify-end pb-4"}`}>
+      <div
+        className={`md:flex items-center  ${
+          searchPlaceholder ? "justify-between  py-4" : "justify-end pb-4"
+        }`}
+      >
         <Input
           placeholder={searchPlaceholder}
           value={globalFilter ?? ""}
@@ -131,32 +128,7 @@ const TableComponent = ({
             <span className="hidden lg:inline">{showAddButton}</span>
           </Button>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="w-fit">
-                <Settings2 className="mr-2 h-4 w-4" /> View
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DataTableViewOptions table={table} />
         </div>
       </div>
 
@@ -216,32 +188,8 @@ const TableComponent = ({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end py-4 gap-2">
-        <div className="flex items-center gap-2">
-          <div className="text-xs text-muted-foreground">
-            {`Page ${
-              table.getState().pagination.pageIndex + 1
-            } of ${table.getPageCount()}`}
-          </div>
-          <div className="space-x-1 md:space-x-2">
-            <Button
-              variant="outline"
-              className="h-7 w-7 p-0"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <ChevronLeft className="size-4" />
-            </Button>
-            <Button
-              variant="outline"
-              className="h-7 w-7 p-0"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              <ChevronRight className="size-4" />
-            </Button>
-          </div>
-        </div>
+      <div className="mt-4">
+        <DataTablePagination table={table}/>
       </div>
     </>
   );

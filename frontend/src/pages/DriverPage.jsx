@@ -7,9 +7,6 @@ import { createCategoryMap } from "@/util/categoryMap";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ActiveTab from "@/components/drivers/ActiveTab";
-import InactiveTab from "@/components/drivers/InactiveTab";
 import DriversTable from "@/components/drivers/DriversTable";
 
 const sexMap = createCategoryMap({

@@ -37,6 +37,8 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --warning: oklch(0.84 0.16 84);
+    --warning-foreground: oklch(0.28 0.07 46);
   }
 
   .dark {
@@ -72,9 +74,14 @@
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 224.3 76.3% 48%;
+    --warning: oklch(0.41 0.11 46);
+    --warning-foreground: oklch(0.99 0.02 95);
   }
 }
-
+@theme inline {
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+}
 @layer base {
   * {
     @apply border-border;

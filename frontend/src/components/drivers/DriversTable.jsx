@@ -43,6 +43,8 @@ import {
 import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
+import { DataTableViewOptions } from "../table/DataTableViewOptions";
+import { DataTablePagination } from "../table/DataTablePagination";
 
 const DriversTable = ({
   searchPlaceholder = null,
@@ -79,7 +81,6 @@ const DriversTable = ({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onGlobalFilterChange: setGlobalFilter,
-    pageCount: Math.ceil(data.length / pagination.pageSize),
     globalFilterFn: (row, columnIds, filterValue) => {
       // This function will filter across multiple columns
       return filterColumns.some((columnId) => {
@@ -97,14 +98,6 @@ const DriversTable = ({
       globalFilter,
     },
   });
-
-  const handleRowsPerPageChange = (size) => {
-    setPagination((prev) => ({
-      ...prev,
-      pageSize: size,
-      pageIndex: 0, // Reset to first page when page size changes
-    }));
-  };
   return (
     <>
       <Label className="font-semibold">{title}</Label>
@@ -122,7 +115,6 @@ const DriversTable = ({
         <div className="flex gap-2 justify-end md:justify-normal md:items-center">
           <Button
             onClick={onAdd}
-            size="sm"
             className={"w-min flex items-center gap-2"}
           >
             <Plus />
@@ -131,38 +123,12 @@ const DriversTable = ({
           <Button
             onClick={onNavigate}
             variant="outline"
-            size="sm"
             className={"w-min flex items-center gap-2"}
           >
             <Trash />
             <span className="hidden lg:inline">{"Bin"}</span>
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="w-fit">
-                <Settings2 className="mr-2 h-4 w-4" /> View
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => {
-                  return (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {column.id}
-                    </DropdownMenuCheckboxItem>
-                  );
-                })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DataTableViewOptions table={table}/>
         </div>
       </div>
 
@@ -222,32 +188,8 @@ const DriversTable = ({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end py-4 gap-2">
-        <div className="flex items-center gap-2">
-          <div className="text-xs text-muted-foreground">
-            {`Page ${
-              table.getState().pagination.pageIndex + 1
-            } of ${table.getPageCount()}`}
-          </div>
-          <div className="space-x-1 md:space-x-2">
-            <Button
-              variant="outline"
-              className="h-7 w-7 p-0"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <ChevronLeft className="size-4" />
-            </Button>
-            <Button
-              variant="outline"
-              className="h-7 w-7 p-0"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              <ChevronRight className="size-4" />
-            </Button>
-          </div>
-        </div>
+      <div className="mt-4">
+         <DataTablePagination table={table}/>
       </div>
     </>
   );
