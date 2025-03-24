@@ -139,7 +139,7 @@ const FormComponent = ({ onSubmit, form, submitting }) => {
                         </SelectTrigger>
                       </FormControl>
 
-                      <SelectContent className="bg-white border-zinc-400">
+                      <SelectContent className="">
                         <SelectGroup>
                           {/* <SelectLabel>Sex</SelectLabel> */}
                           <SelectItem value="0">Male</SelectItem>
@@ -233,7 +233,7 @@ const FormComponent = ({ onSubmit, form, submitting }) => {
                         </SelectTrigger>
                       </FormControl>
 
-                      <SelectContent className="bg-white border-zinc-400">
+                      <SelectContent className="">
                         <SelectGroup>
                           {/* <SelectLabel>Sex</SelectLabel> */}
                           <SelectItem value="0">Single</SelectItem>
