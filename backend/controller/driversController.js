@@ -2,9 +2,6 @@ import DriverModel from "../model/DriverModel.js";
 import UserModel from "../model/UserModel.js";
 
 export const createDriver = async (req, res) => {
-  const firstName = req.body.firstName;
-  const birthDate = req.body.birthDate;
-  const lastName = req.body.lastName;
   const licenseNo = req.body.licenseNo;
   try {
     const driver = await DriverModel.findOne({ licenseNo });
@@ -16,10 +13,10 @@ export const createDriver = async (req, res) => {
       });
     }
 
-    const accCreated = await generateUserAcc(birthDate, lastName, firstName);
+    // const accCreated = await generateUserAcc(birthDate, lastName, firstName);
     
-    // Attach the generated user account ID to the request body
-    req.body.userAccount = accCreated._id;
+    // // Attach the generated user account ID to the request body
+    // req.body.userAccount = accCreated._id;
     await DriverModel.create(req.body);
 
     res.status(201).json({
@@ -126,7 +123,7 @@ export const updateDriverStatus = async (req, res) => {
     });
   }
 };
-
+//deprecated. Only admin has access to the system
 const generateUserAcc = async (birthDate, lastName, firstName) => {
   // Convert birthDate string to Date object (if it's not already a Date object)
   const date = new Date(birthDate);

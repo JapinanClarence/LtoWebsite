@@ -4,8 +4,8 @@ import { getDriverLogs, getLogs } from "../controller/driverLogsController.js";
 
 const logsRouter = express.Router();
 //get all logs for admin
-logsRouter.get("/", authenticate, authorizeRole("admin", "superadmin"), getLogs);   
+logsRouter.get("/", authenticate, getLogs);   
 //get logs for driver
-logsRouter.get("/:id", authenticate, authorizeRole("admin", "superadmin","driver"), getDriverLogs);
+logsRouter.get("/:id", authenticate, getDriverLogs);
 
 export default logsRouter;

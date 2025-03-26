@@ -15,7 +15,7 @@ vehicleRouter.post(
   createVehicle
 );
 
-vehicleRouter.get("/", authenticate, authorizeRole("admin", "superadmin"), getVehicle);
-vehicleRouter.get("/:id", authenticate, authorizeRole("admin", "superadmin"), findVehicle);
+vehicleRouter.get("/", authenticate, getVehicle);
+vehicleRouter.get("/:id", authenticate, findVehicle);
 
 export default vehicleRouter;

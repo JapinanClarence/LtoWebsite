@@ -12,7 +12,7 @@ import authenticate, { authorizeRole } from "../middleware/authMiddleware.js";
 const violationRouter = express.Router();
 
 // Create a violation (Only Admin or Superadmin)
-violationRouter.post("/", authenticate, authorizeRole("admin", "superadmin"), express.json(), validateViolation, validate, createViolation);
+violationRouter.post("/", authenticate, express.json(), validateViolation, validate, createViolation);
 
 // Get all violations (Authenticated Users)
 violationRouter.get("/", authenticate, getViolations);
@@ -21,9 +21,9 @@ violationRouter.get("/", authenticate, getViolations);
 violationRouter.get("/:id", authenticate, getViolationById);
 
 // Update a violation (Only Admin or Superadmin)
-violationRouter.patch("/:id", authenticate, authorizeRole("admin", "superadmin"), express.json(), validateViolation, validate, updateViolation);
+violationRouter.patch("/:id", authenticate, express.json(), validateViolation, validate, updateViolation);
 
 // // Delete a violation (Only Admin or Superadmin)
-// violationRouter.delete("/:id", authenticate, authorizeRole("admin", "superadmin"), deleteViolation);
+// violationRouter.delete("/:id", authenticate, deleteViolation);
 
 export default violationRouter;
