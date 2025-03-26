@@ -27,7 +27,7 @@ const DriverPage = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
-  const [currentDriver, setCurrentDriver] = useState("");
+  const [selectedDriver, setSelectedDriver] = useState("");
 
   useEffect(() => {
     fetchDrivers();
@@ -77,7 +77,7 @@ const DriverPage = () => {
 
   const handleDeactivate = (data) => {
     setShowAlert(true);
-    setCurrentDriver(data)
+    setSelectedDriver(data)
   };
 
   const confirmDelete = () => {
@@ -93,7 +93,7 @@ const DriverPage = () => {
     const promise = async () => {
       try {
         const response = await apiClient.patch(
-          `/driver/${currentDriver}/updateStatus`,
+          `/driver/${selectedDriver}/updateStatus`,
           {
             isActive: data,
           },

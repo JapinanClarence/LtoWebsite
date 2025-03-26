@@ -207,3 +207,74 @@ export const logs = () => [
     cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
   },
 ];
+export const vehicleColumns = (onManage, onDelete) => [
+  {
+    accessorKey: "plateNo",
+    header: "Plate No.",
+    cell: ({ row }) => <div className="">{row.getValue("plateNo")}</div>,
+  },
+  {
+    accessorKey: "make",
+    header: "Make",
+    cell: ({ row }) => <div className="">{row.getValue("make")}</div>,
+  },
+  {
+    accessorKey: "series",
+    header: "Series",
+    cell: ({ row }) => <div className="">{row.getValue("series")}</div>,
+  },
+  {
+    accessorKey: "type",
+    header: "Type",
+    cell: ({ row }) => <div className="">{row.getValue("type")}</div>,
+  },
+  {
+    accessorKey: "color",
+    header: "Color",
+    cell: ({ row }) => <div className="">{row.getValue("color")}</div>,
+  },
+  {
+    accessorKey: "bodyType",
+    header: "Body Type",
+    cell: ({ row }) => <div className="">{row.getValue("bodyType")}</div>,
+  },
+  {
+    accessorKey: "classification",
+    header: "Classification",
+    cell: ({ row }) => <div className="">{row.getValue("classification")}</div>,
+  },
+  {
+    accessorKey: "dateRegistered",
+    header: "Date Registered",
+    cell: ({ row }) => <div className="">{row.getValue("dateRegistered")}</div>,
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const vehicle = row.original;
+      const handleManage = (e) => {
+        e.stopPropagation();
+        onAction(vehicle._id);
+      };
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-5 w-5 p-0">
+              <span className="sr-only">Open menu</span>
+              <DotsHorizontalIcon className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {/* <DropdownMenuItem onClick={handleManage}>
+              Activate
+              <Plus />
+            </DropdownMenuItem> */}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  },
+];

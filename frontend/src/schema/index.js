@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export const LoginSchema = z.object({
   email: z.string().email(),
@@ -33,7 +33,7 @@ export const CreateDriverSchema = z.object({
   nationality: z.string().min(1, {
     message: "Nationality is required",
   }),
-  sex: z.enum(["0","1"], {
+  sex: z.enum(["0", "1"], {
     required_error: "Sex is required.",
   }),
   birthDate: z.date({
@@ -51,4 +51,69 @@ export const CreateDriverSchema = z.object({
   birthPlace: z.string().min(1, {
     message: "Birthplace is required",
   }),
+});
+
+export const VehicleSchema = z.object({
+  plateNo: z
+    .string()
+    .min(1, {
+      message: "Plate number is required",
+    })
+    .max(8, { message: "Plate number must not exceed 8 characters" }),
+  firstName: z.string().min(1, {
+    message: "Firstname is required",
+  }),
+  middleName: z.string().optional(),
+  lastName: z.string().min(1, {
+    message: "Lastname is required",
+  }),
+  street: z.string().min(1, {
+    message: "Street is required",
+  }),
+  barangay: z.string().min(1, {
+    message: "Barangay is required",
+  }),
+  municipality: z.string().min(1, {
+    message: "Municipality is required",
+  }),
+  province: z.string().min(1, {
+    message: "Province is required",
+  }),
+  fileNo: z.string().optional(),
+  encumbrance: z.string().optional(),
+  vehicleType: z.string().min(1, {
+    message: "Vehicle Type is required",
+  }),
+  classification: z.string().min(1, {
+    message: "Classification is required",
+  }),
+  make: z.string().min(1, {
+    message: "Make is required",
+  }),
+  fuelType: z.string().min(1, {
+    message: "Fuel type is required",
+  }),
+  motorNumber: z.string().min(1, {
+    message: "Motor number is required",
+  }),
+  serialChassisNumber: z.string().min(1, {
+    message: "Serial chassis number is required",
+  }),
+  series: z.string().min(1, {
+    message: "Series is required",
+  }),
+  bodyType: z.string().min(1, {
+    message: "Body type is required",
+  }),
+  color: z.string().min(1, {
+    message: "Color is required",
+  }),
+  yearModel: z.string().min(1, {
+    message: "Year model is required",
+  }),
+  dateRegistered: z.date({
+    required_error: "Registered date is required.",
+  }),
+  customVehicleType:z.string().optional(),
+  customFuelType: z.string().optional()
 });

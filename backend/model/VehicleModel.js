@@ -2,15 +2,7 @@ import mongoose from "mongoose";
 
 /**
  * vehicle type:
- * 0= new
- * 1 = 2nd hand
- * 2= rebuilt
- * 3 = car
- * 4 = truck
- * 5 = hire
- * 6 = mo
- * 7 = to
- * 8= others
+ * 
  *
  * fuel type:
  * 0 = gas
@@ -19,13 +11,17 @@ import mongoose from "mongoose";
  * 3 = CNG
  * 4 = electric
  * 5 = others
- * 
+ *
  * expired:
  * 0 = false
  * 1 = true
+ * 
+ * classification:
+ * 0 = private
+ * 1 = for hire
  */
 
-const encumbranceSchema = new mongoose.Schema({
+const ownerSchema = new mongoose.Schema({
   firstname: { type: String },
   lastname: { type: String },
   middlename: { type: String },
@@ -46,14 +42,12 @@ const vehicleSchema = new mongoose.Schema(
       type: String,
     },
     owner: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Drivers",
-      required: true,
+      type: ownerSchema,
     },
-    encumbrance: { type: encumbranceSchema },
+    encumbrance: { type: String },
     vehicleType: {
       type: String,
-      enum: ["0", "1", "2", "3", "4", "5", "6", "7", "8"],
+      required: true,
     },
     classification: {
       type: String,
@@ -64,18 +58,16 @@ const vehicleSchema = new mongoose.Schema(
       required: [true, "make is required"],
     },
     fuelType: {
-      type: String,
-      enum: ["0", "1", "2", "3", "4", "5", "6"],
+      type: String, 
     },
     motorNumber: {
       type: String,
       required: true,
-      match: [/^[a-zA-Z0-9-]+$/, "Invalid motor number format"],
     },
     serialChassisNumber: {
       type: String,
       required: true,
-      match: [/^[a-zA-Z0-9-]+$/, "Invalid chassis number format"],
+      unique: true,
     },
     series: { type: String, required: true, trim: true },
     bodyType: { type: String, required: true, trim: true },
@@ -91,16 +83,15 @@ const vehicleSchema = new mongoose.Schema(
     dateRegistered: {
       type: Date,
       required: [true, "dateRegistered is required"],
-      validate: {
-        validator: (value) => value <= new Date(),
-        message: "Registration date cannot be in the future.",
-      },
+      // validate: {
+      //   validator: (value) => value <= new Date(),
+      //   message: "Registration date cannot be in the future.",
+      // },
     },
-    expired: {
-      type: String, 
-      enum: ["0", "1"],
-      default:"0"
-    }
+    // expired: {
+    //   type: Boolean,
+    //   defualt: false
+    // },
   },
   {
     timestamps: true,

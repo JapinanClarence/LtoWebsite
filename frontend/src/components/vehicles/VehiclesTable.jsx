@@ -15,6 +15,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import {
   ChevronLeft,
@@ -24,15 +31,21 @@ import {
   Settings2,
   Trash,
 } from "lucide-react";
-
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { DataTableViewOptions } from "../table/DataTableViewOptions";
 import { DataTablePagination } from "../table/DataTablePagination";
-
-const DriversTable = ({
-  searchPlaceholder = null,
+const VehiclesTable = ({
   title,
   filters,
   description,
@@ -42,7 +55,7 @@ const DriversTable = ({
   onNavigate,
   onAdd,
   onManage,
-  onDelete
+  onDelete,
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -92,29 +105,26 @@ const DriversTable = ({
         `}
       >
         <Input
-          placeholder={"Search Driver..."}
+          placeholder={"Search Vehicle..."}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
           className={"hidden md:inline md:max-w-sm flex-shrink"}
         />
 
         <div className="flex gap-2 justify-end md:justify-normal md:items-center">
-          <Button
-            onClick={onAdd}
-            className={"w-min flex items-center gap-2"}
-          >
+          <Button onClick={onAdd} className={"w-min flex items-center gap-2"}>
             <Plus />
-            <span className="hidden lg:inline">{"Add Driver"}</span>
+            <span className="hidden lg:inline">{"Add Vehicle"}</span>
           </Button>
-          <Button
+          {/* <Button
             onClick={onNavigate}
             variant="outline"
             className={"w-min flex items-center gap-2"}
           >
             <Trash />
             <span className="hidden lg:inline">{"Bin"}</span>
-          </Button>
-          <DataTableViewOptions table={table}/>
+          </Button> */}
+          <DataTableViewOptions table={table} />
         </div>
       </div>
 
@@ -175,10 +185,10 @@ const DriversTable = ({
         </Table>
       </div>
       <div className="mt-4">
-         <DataTablePagination table={table}/>
+        <DataTablePagination table={table} />
       </div>
     </>
   );
 };
 
-export default DriversTable;
+export default VehiclesTable;

@@ -12,6 +12,8 @@ import DriverProfile from "./pages/DriverProfile";
 import PageNotFound from "./pages/PageNotFound";
 import EditDriverForm from "./pages/EditDriverForm";
 import DeactivatedDriversPage from "./pages/DeactivatedDriversPage";
+import VehiclesPage from "./pages/VehiclesPage";
+import AddVehicleForm from "./pages/AddVehicleForm";
 
 function App() {
   return (
@@ -33,11 +35,18 @@ function App() {
           >
             <Route element={<DashboardLayout />}>
               <Route index element={<HomePage />} />
+
+              {/* driver routes */}
               <Route path="/driver" element={<DriverPage />} />
               <Route path="/driver/inactive" element={<DeactivatedDriversPage />} />
               <Route path="/driver/create" element={<AddDriverForm />} />
               <Route path="/driver/:id" element={<DriverProfile />} />
               <Route path="/driver/:id/edit" element={<EditDriverForm />} />
+
+
+              {/* vehicle routes */}
+              <Route path="/vehicle" element={<VehiclesPage />} />
+              <Route path="/vehicle/create" element={<AddVehicleForm/>}/>
             </Route>
           </Route>
         </Route>

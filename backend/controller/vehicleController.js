@@ -4,18 +4,9 @@ import DriverModel from "../model/DriverModel.js";
 import { logAction } from "../util/logger.js";
 
 export const createVehicle = async (req, res) => {
-  const ownerId = req.body.owner;
   const plateNo = req.body.plateNo;
   try {
-    const driverExists = await DriverModel.findById(ownerId);
     const plateNoTaken = await VehicleModel.findOne({ plateNo });
-
-    if (!driverExists) {
-      return res.status(404).json({
-        success: false,
-        message: "Driver not found",
-      });
-    }
 
     if (plateNoTaken) {
       return res.status(400).json({
@@ -25,12 +16,6 @@ export const createVehicle = async (req, res) => {
     }
 
     const vehicle = await VehicleModel.create(req.body);
-
-    await logAction(ownerId, "0", {
-      entityId: vehicle._id,
-      message:"Driver registered a vehicle",
-      entityType: "Vehicle",
-    });
 
     res.status(201).json({
       success: true,
@@ -46,19 +31,14 @@ export const createVehicle = async (req, res) => {
 
 export const getVehicle = async (req, res) => {
   try {
-    const vehicles = await VehicleModel.find().populate({
-      path: "driverDetails",
-      select: "fullname firstName middleName lastName",
-    });
+    const vehicles = await VehicleModel.find().sort({createdAt: -1});
 
+    console.log(vehicles)
     const vehicleDetails = vehicles.map((data) => {
       return {
         _id: data._id,
-        owner: {
-          _id: data.driverDetails.id,
-          fullName: data.driverDetails.fullname,
-        },
-        vehicleType: data.vehicleType,
+        owner: data.owner,
+        type: data.vehicleType,
         classification: data.classification,
         make: data.make,
         fuelType: data.fuelType,
@@ -68,9 +48,11 @@ export const getVehicle = async (req, res) => {
         color: data.color,
         yearModel: data.yearModel,
         dateRegistered: data.dateRegistered,
-        expired: data.expired
+        plateNo: data.plateNo
       };
     });
+
+    console.log(vehicleDetails)
 
     res.status(200).json({
       success: true,

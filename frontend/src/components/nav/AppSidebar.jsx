@@ -137,7 +137,7 @@ export function AppSidebar(props) {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="#">
+                <a href="/vehicle">
                   <Car />
                   <span>Manage Vehicles</span>
                 </a>
