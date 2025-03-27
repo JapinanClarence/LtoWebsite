@@ -73,10 +73,10 @@ const VehicleCard = () => {
         </CardHeader>
         <CardContent className="p-0 pb-6">
           <div className="grid grid-cols-2 text-sm gap-4 mb-2">
-            <h1 className="font-bold col-span-2 border-b px-4 py-2">
+            <h1 className="font-bold col-span-2 border-b px-6 py-1">
               Owner Information
             </h1>
-            <h2 className="text-muted-foreground px-4">Fullname:</h2>
+            <h2 className="text-muted-foreground px-6">Fullname:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.owner
                 ? getFullName(
@@ -86,61 +86,61 @@ const VehicleCard = () => {
                   )
                 : "N/A"}
             </p>
-            <h2 className="text-muted-foreground px-4">Address:</h2>
+            <h2 className="text-muted-foreground px-6">Address:</h2>
             <p className="font-semibold w-full">
               {`${vehicleData?.owner.street}, ${vehicleData?.owner.barangay}, ${vehicleData?.owner.municipality}, ${vehicleData?.owner.province}`}
             </p>
-            <h1 className="font-bold col-span-2 border-y px-4 py-2">Documentation</h1>
-            <h2 className="text-muted-foreground px-4">Enumbrance:</h2>
+            <h1 className="font-bold col-span-2 border-y px-6 py-1">Documentation</h1>
+            <h2 className="text-muted-foreground px-6">Enumbrance:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.encumbrance || "Null"}
             </p>
-            <h2 className="text-muted-foreground px-4">File Number:</h2>
+            <h2 className="text-muted-foreground px-6">File Number:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.fileNo || "Null"}
             </p>
-            <h2 className="text-muted-foreground px-4">Vehicle Type:</h2>
+            <h2 className="text-muted-foreground px-6">Vehicle Type:</h2>
             <p className="font-semibold w-full">{vehicleData?.vehicleType}</p>
-            <h1 className="font-bold col-span-2 border-y px-4 py-2">Identification</h1>
+            <h1 className="font-bold col-span-2 border-y px-6 py-1">Identification</h1>
 
-            <h2 className="text-muted-foreground px-4">Plate Number:</h2>
+            <h2 className="text-muted-foreground px-6">Plate Number:</h2>
             <p className="font-semibold w-full">{vehicleData?.plateNo}</p>
-            <h2 className="text-muted-foreground px-4">Make:</h2>
+            <h2 className="text-muted-foreground px-6">Make:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.make
                 ? capitalizeFirstLetter(vehicleData.make)
                 : "N/A"}
             </p>
-            <h2 className="text-muted-foreground px-4">Series:</h2>
+            <h2 className="text-muted-foreground px-6">Series:</h2>
             <p className="font-semibold w-full">
               {" "}
               {vehicleData?.series
                 ? capitalizeFirstLetter(vehicleData.series)
                 : "N/A"}
             </p>
-            <h2 className="text-muted-foreground px-4">Classification:</h2>
+            <h2 className="text-muted-foreground px-6">Classification:</h2>
             <p className="font-semibold w-full">
               {classificationMap.get(vehicleData?.classification)}
             </p>
-            <h2 className="text-muted-foreground px-4">Body Type:</h2>
+            <h2 className="text-muted-foreground px-6">Body Type:</h2>
             <p className="font-semibold w-full">{vehicleData?.bodyType}</p>
-            <h2 className="text-muted-foreground px-4">Color:</h2>
+            <h2 className="text-muted-foreground px-6">Color:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.color
                 ? capitalizeFirstLetter(vehicleData.color)
                 : "N/A"}
             </p>
-            <h2 className="text-muted-foreground px-4">Fuel Type:</h2>
+            <h2 className="text-muted-foreground px-6">Fuel Type:</h2>
             <p className="font-semibold w-full">{vehicleData?.fuelType}</p>
-            <h2 className="text-muted-foreground px-4">Year Model:</h2>
+            <h2 className="text-muted-foreground px-6">Year Model:</h2>
             <p className="font-semibold w-full">{vehicleData?.yearModel}</p>
-            <h2 className="text-muted-foreground px-4">Motor Number:</h2>
+            <h2 className="text-muted-foreground px-6">Motor Number:</h2>
             <p className="font-semibold w-full">{vehicleData?.motorNumber}</p>
-            <h2 className="text-muted-foreground px-4">Serial/Chassis Number:</h2>
+            <h2 className="text-muted-foreground px-6">Serial/Chassis Number:</h2>
             <p className="font-semibold w-full">
               {vehicleData?.serialChassisNumber}
             </p>
-            <h2 className="text-muted-foreground px-4">Date Registered:</h2>
+            <h2 className="text-muted-foreground px-6">Date Registered:</h2>
             <p className="font-semibold w-full">
               {formatSimpleDate(vehicleData?.dateRegistered)}
             </p>

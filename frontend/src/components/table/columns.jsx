@@ -207,7 +207,7 @@ export const logs = () => [
     cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
   },
 ];
-export const vehicleColumns = (onManage, onDelete) => [
+export const vehicleColumns = (onEdit, onDelete) => [
   {
     accessorKey: "plateNo",
     header: "Plate No.",
@@ -253,9 +253,9 @@ export const vehicleColumns = (onManage, onDelete) => [
     enableHiding: false,
     cell: ({ row }) => {
       const vehicle = row.original;
-      const handleManage = (e) => {
+      const handleEdit = (e) => {
         e.stopPropagation();
-        onAction(vehicle._id);
+        onEdit(vehicle._id);
       };
       return (
         <DropdownMenu>
@@ -268,10 +268,10 @@ export const vehicleColumns = (onManage, onDelete) => [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            {/* <DropdownMenuItem onClick={handleManage}>
-              Activate
-              <Plus />
-            </DropdownMenuItem> */}
+            <DropdownMenuItem onClick={handleEdit}>
+              Edit
+              <Edit />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

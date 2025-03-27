@@ -70,6 +70,10 @@ const VehiclesPage = () => {
     navigate(`/vehicle/${vehicleId}`);
   };
 
+  const onEdit =(vehicleId) =>{
+    navigate(`/vehicle/${vehicleId}/edit`)
+  }
+
   const handleDeactivate = (data) => {
     setShowAlert(true);
     setSelectedVehicle(data);
@@ -95,6 +99,7 @@ const VehiclesPage = () => {
           onAdd={handleAdd}
           loading={loading}
           onRowClick={onRowClick}
+          onEdit={onEdit}
           onDelete={handleDeactivate}
         />
       </section>
