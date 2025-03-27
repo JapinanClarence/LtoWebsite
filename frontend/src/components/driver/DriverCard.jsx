@@ -10,9 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { formatSimpleDate } from "@/util/dateFormatter";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Edit, Trash } from "lucide-react";
 import { toast } from "sonner";
 import ConfirmationDIalog from "../dialog/ConfirmationDIalog";
@@ -34,7 +34,8 @@ const DriverCard = () => {
   const { token } = useAuth();
   const [driverData, setDriverData] = useState();
   const [showAlert, setShowAlert] = useState(false);
-  const [submitting, setIsSubmitting] = useState(false);
+  const [submitting, setIsSubmitting] = useState(false);  
+  const location = useLocation();
 
   const navigate = useNavigate();
   const fetchDriver = async () => {
@@ -164,7 +165,7 @@ const DriverCard = () => {
         </CardContent>
         <CardFooter className="gap-2 text-sm ">
           <Button
-            onClick={() => navigate(`/driver/${params.id}/edit`)}
+            onClick={() => navigate(`${location.pathname}/edit`)}
             size="sm"
             className="font-semibold"
             variant="outline"

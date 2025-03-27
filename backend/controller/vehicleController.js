@@ -33,7 +33,6 @@ export const getVehicle = async (req, res) => {
   try {
     const vehicles = await VehicleModel.find().sort({createdAt: -1});
 
-    console.log(vehicles)
     const vehicleDetails = vehicles.map((data) => {
       return {
         _id: data._id,
@@ -52,8 +51,6 @@ export const getVehicle = async (req, res) => {
       };
     });
 
-    console.log(vehicleDetails)
-
     res.status(200).json({
       success: true,
       data: vehicleDetails,
@@ -69,10 +66,7 @@ export const getVehicle = async (req, res) => {
 export const findVehicle = async (req, res) =>{
   const vehicleId = req.params.id;
   try {
-    const vehicle = await VehicleModel.findById(vehicleId).populate({
-      path: "driverDetails",
-      select: "fullname firstName middleName lastName",
-    });
+    const vehicle = await VehicleModel.findById(vehicleId);
 
     if(!vehicle){
       return res.status(404).json({
@@ -85,10 +79,7 @@ export const findVehicle = async (req, res) =>{
       _id: vehicle._id,
       plateNo: vehicle.plateNo,
       fileNo: vehicle.fileNo,
-      owner: {
-        _id: vehicle.driverDetails._id,
-        fullname: vehicle.driverDetails.fullname
-      },
+      owner:  vehicle.owner,
       encumbrance: vehicle.encumbrance,
       vehicleType: vehicle.vehicleType,
       classification: vehicle.classification,
@@ -101,7 +92,6 @@ export const findVehicle = async (req, res) =>{
       color: vehicle.color,
       yearModel: vehicle.yearModel,
       dateRegistered: vehicle.dateRegistered,
-      expired: vehicle.expired
     }
 
     res.status(200).json({

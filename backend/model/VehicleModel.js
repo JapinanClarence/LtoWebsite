@@ -22,9 +22,9 @@ import mongoose from "mongoose";
  */
 
 const ownerSchema = new mongoose.Schema({
-  firstname: { type: String },
-  lastname: { type: String },
-  middlename: { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
+  middleName: { type: String },
   street: { type: String },
   barangay: { type: String },
   municipality: { type: String },
@@ -102,13 +102,6 @@ const vehicleSchema = new mongoose.Schema(
 
 vehicleSchema.index({ owner: 1 });
 
-//return driver details
-vehicleSchema.virtual("driverDetails", {
-  ref: "Drivers",
-  localField: "owner",
-  foreignField: "_id",
-  justOne: true,
-});
 
 const VehicleModel = mongoose.model("Vehicles", vehicleSchema);
 

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
 import { formatSimpleDate } from "@/util/dateFormatter";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";

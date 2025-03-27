@@ -1,7 +1,7 @@
 import apiClient from "@/api/axios";
 import { driverColumns } from "@/components/table/columns";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

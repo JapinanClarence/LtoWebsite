@@ -4,7 +4,7 @@ import { driverLogs } from "../table/columns";
 import TableComponent from "../table/TableComponent";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { formatSimpleDateTime } from "@/util/dateFormatter";
 import { useParams } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import apiClient from "@/api/axios";
 import { vehicleColumns } from "@/components/table/columns";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -58,21 +58,21 @@ const VehiclesPage = () => {
       setLoading(false);
     }
   };
+  //navigate to add vehicle page
   const handleAdd = async () => {
     navigate(`${location.pathname}/create`);
   };
 
-  const onManage = (id) => {
-    navigate(`/driver/${id}`);
-  };
+  //navigate to vehicle page
+  const onRowClick = (data) => {
+    const vehicleId = data._id;
 
-  const handleNavigate = () => {
-    navigate(`${location.pathname}/inactive`);
+    navigate(`/vehicle/${vehicleId}`);
   };
 
   const handleDeactivate = (data) => {
     setShowAlert(true);
-    setSelectedDriver(data);
+    setSelectedVehicle(data);
   };
 
   const confirmDelete = () => {
@@ -87,15 +87,15 @@ const VehiclesPage = () => {
     <div className="p-4">
       <header className="text-xl md:text-3xl font-bold mb-5">Vehicles</header>
       <section>
+        {/* Call vehicle table component */}
         <VehiclesTable
           data={vehicleData}
           filters={["fullname", "licenseNo"]}
           tableColumn={vehicleColumns}
           onAdd={handleAdd}
           loading={loading}
-          onManage={onManage}
+          onRowClick={onRowClick}
           onDelete={handleDeactivate}
-          onNavigate={handleNavigate}
         />
       </section>
       {/* <ConfirmationDIalog

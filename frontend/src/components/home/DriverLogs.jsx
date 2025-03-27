@@ -4,7 +4,7 @@ import { logs } from "@/components/table/columns";
 import TableComponent from "@/components/table/TableComponent";
 import apiClient from "@/api/axios";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/categoryMap";
+import { createCategoryMap } from "@/util/helper";
 import { formatSimpleDateTime } from "@/util/dateFormatter";
 
 const logTypeMap = createCategoryMap({

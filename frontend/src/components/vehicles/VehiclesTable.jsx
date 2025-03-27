@@ -31,15 +31,6 @@ import {
   Settings2,
   Trash,
 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import TableSkeleton from "@/components/table/TableSkeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
@@ -48,11 +39,10 @@ import { DataTablePagination } from "../table/DataTablePagination";
 const VehiclesTable = ({
   title,
   filters,
-  description,
   tableColumn,
   data,
   loading,
-  onNavigate,
+  onRowClick,
   onAdd,
   onManage,
   onDelete,
@@ -116,14 +106,6 @@ const VehiclesTable = ({
             <Plus />
             <span className="hidden lg:inline">{"Add Vehicle"}</span>
           </Button>
-          {/* <Button
-            onClick={onNavigate}
-            variant="outline"
-            className={"w-min flex items-center gap-2"}
-          >
-            <Trash />
-            <span className="hidden lg:inline">{"Bin"}</span>
-          </Button> */}
           <DataTableViewOptions table={table} />
         </div>
       </div>
@@ -154,6 +136,7 @@ const VehiclesTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  onClick={() => onRowClick(row.original)}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
