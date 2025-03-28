@@ -169,7 +169,7 @@ const EditVehicleForm = () => {
         expirationDate: formData.expirationDate,
       };
 
-      console.log(content);
+
       const { data } = await apiClient.patch(`/vehicle/${params.id}`, content, {
         headers: {
           Authorization: token,

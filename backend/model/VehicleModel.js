@@ -12,9 +12,9 @@ import mongoose from "mongoose";
  * 4 = electric
  * 5 = others
  *
- * expired:
- * 0 = false
- * 1 = true
+ * status:
+ * 0 = expired
+ * 1 = active
  * 
  * classification:
  * 0 = private
@@ -88,6 +88,11 @@ const vehicleSchema = new mongoose.Schema(
       type: Date,
       required: [true, "dateRegistered is required"],
     },
+    status:{
+      stype: String,
+      enum:["0","1"],
+      default:"1"
+    }
   },
   {
     timestamps: true,
