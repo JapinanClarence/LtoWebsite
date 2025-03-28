@@ -1,7 +1,7 @@
 import apiClient from "@/api/axios";
 import { vehicleColumns } from "@/components/table/columns";
 import { useAuth } from "@/context/AuthContext";
-import { createCategoryMap } from "@/util/helper";
+import { createCategoryMap, getFullName } from "@/util/helper";
 import { formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -15,8 +15,6 @@ const classificationMap = createCategoryMap({
   1: "For Hire",
   2: "Government",
 });
-
-
 
 const VehiclesPage = () => {
   const [vehicleData, setVehicleData] = useState([]);
@@ -38,18 +36,27 @@ const VehiclesPage = () => {
           Authorization: token,
         },
       });
-    
-      const vehicleData = data.data.map((dData) => ({
-        _id: dData._id,
-        plateNo: dData.plateNo,
-        color: dData.color,
-        bodyType: dData.bodyType,
-        dateRegistered: formatSimpleDate(dData.dateRegistered),
-        type: dData.type,
-        make: dData.make,
-        series: dData.series,
-        classification: classificationMap.get(dData.classification),
-      }));
+
+      const vehicleData = data.data.map((dData) => {
+        const owner = getFullName(
+          dData.owner.firstName,
+          dData.owner.lastName,
+          dData.owner.middleName
+        );
+
+        return {
+          _id: dData._id,
+          plateNo: dData.plateNo,
+          color: dData.color,
+          owner: owner,
+          dateRegistered: formatSimpleDate(dData.dateRegistered),
+          expirationDate: formatSimpleDate(dData.expirationDate),
+          type: dData.type,
+          make: dData.make,
+          series: dData.series,
+          classification: classificationMap.get(dData.classification),
+        };
+      });
 
       setVehicleData(vehicleData);
     } catch (error) {
@@ -70,9 +77,9 @@ const VehiclesPage = () => {
     navigate(`/vehicle/${vehicleId}`);
   };
 
-  const onEdit =(vehicleId) =>{
-    navigate(`/vehicle/${vehicleId}/edit`)
-  }
+  const onEdit = (vehicleId) => {
+    navigate(`/vehicle/${vehicleId}/edit`);
+  };
 
   const handleDeactivate = (data) => {
     setShowAlert(true);

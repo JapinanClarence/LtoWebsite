@@ -83,15 +83,11 @@ const vehicleSchema = new mongoose.Schema(
     dateRegistered: {
       type: Date,
       required: [true, "dateRegistered is required"],
-      // validate: {
-      //   validator: (value) => value <= new Date(),
-      //   message: "Registration date cannot be in the future.",
-      // },
     },
-    // expired: {
-    //   type: Boolean,
-    //   defualt: false
-    // },
+    expirationDate: {
+      type: Date,
+      required: [true, "dateRegistered is required"],
+    },
   },
   {
     timestamps: true,

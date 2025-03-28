@@ -123,6 +123,7 @@ const EditVehicleForm = () => {
           motorNumber: data.data?.motorNumber,
           serialChassisNumber: data.data?.serialChassisNumber,
           dateRegistered: new Date(data.data?.dateRegistered),
+          expirationDate: new Date(data.data?.expirationDate),
         };
 
         setVehicleData(vData);
@@ -165,6 +166,7 @@ const EditVehicleForm = () => {
         color: formData.color,
         yearModel: formData.yearModel,
         dateRegistered: formData.dateRegistered,
+        expirationDate: formData.expirationDate,
       };
 
       console.log(content);

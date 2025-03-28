@@ -15,6 +15,16 @@ export const createVehicle = async (req, res) => {
       });
     }
 
+    const dateRegistered = req.body.dateRegistered;
+    const expirationDate = req.body.expirationDate;
+
+    if(dateRegistered > expirationDate){
+      return res.status(400).json({
+        success: false,
+        message: "Date registered cannot be greater than expiration date"
+      })
+    }
+
     const vehicle = await VehicleModel.create(req.body);
 
     res.status(201).json({
@@ -47,6 +57,7 @@ export const getVehicle = async (req, res) => {
         color: data.color,
         yearModel: data.yearModel,
         dateRegistered: data.dateRegistered,
+        expirationDate: data.expirationDate,
         plateNo: data.plateNo,
       };
     });
@@ -92,6 +103,7 @@ export const findVehicle = async (req, res) => {
       color: vehicle.color,
       yearModel: vehicle.yearModel,
       dateRegistered: vehicle.dateRegistered,
+      expirationDate: vehicle.expirationDate,
     };
 
     res.status(200).json({
@@ -108,7 +120,7 @@ export const findVehicle = async (req, res) => {
 
 export const updateVehicle = async (req, res) => {
   const vehicleId = req.params.id;
-  console.log(req.body);
+
   try {
     const vehicle = await VehicleModel.findByIdAndUpdate(vehicleId, req.body);
 

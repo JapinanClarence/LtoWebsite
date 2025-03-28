@@ -84,6 +84,7 @@ const AddVehicleForm = () => {
         color: formData.color,
         yearModel: formData.yearModel,
         dateRegistered: formData.dateRegistered,
+        expirationDate: formData.expirationDate
       };
 
       const { data } = await apiClient.post("/vehicle", content, {

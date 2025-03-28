@@ -114,6 +114,9 @@ export const VehicleSchema = z.object({
   dateRegistered: z.date({
     required_error: "Registered date is required.",
   }),
-  customVehicleType:z.string().optional(),
-  customFuelType: z.string().optional()
+  expirationDate: z.date({
+    required_error: "Expiration date is required.",
+  }),
+  customVehicleType: z.string().optional(),
+  customFuelType: z.string().optional(),
 });

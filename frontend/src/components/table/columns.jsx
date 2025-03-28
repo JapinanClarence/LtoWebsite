@@ -234,19 +234,24 @@ export const vehicleColumns = (onEdit, onDelete) => [
     cell: ({ row }) => <div className="">{row.getValue("color")}</div>,
   },
   {
-    accessorKey: "bodyType",
-    header: "Body Type",
-    cell: ({ row }) => <div className="">{row.getValue("bodyType")}</div>,
-  },
-  {
     accessorKey: "classification",
     header: "Classification",
     cell: ({ row }) => <div className="">{row.getValue("classification")}</div>,
   },
   {
+    accessorKey: "owner",
+    header: "Owner",
+    cell: ({ row }) => <div className="">{row.getValue("owner")}</div>,
+  },
+  {
     accessorKey: "dateRegistered",
     header: "Date Registered",
     cell: ({ row }) => <div className="">{row.getValue("dateRegistered")}</div>,
+  },
+  {
+    accessorKey: "expirationDate",
+    header: "Expiration Date",
+    cell: ({ row }) => <div className="">{row.getValue("expirationDate")}</div>,
   },
   {
     id: "actions",

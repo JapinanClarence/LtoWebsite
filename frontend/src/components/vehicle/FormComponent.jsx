@@ -610,7 +610,7 @@ const FormComponent = ({ onSubmit, form, submitting }) => {
                           "text-red-400"
                       )}
                     >
-                      Serial Chassis No.
+                      Serial/Chassis No.
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -726,6 +726,61 @@ const FormComponent = ({ onSubmit, form, submitting }) => {
                             fieldValue={field.value}
                             dateValue={(date) =>
                               form.setValue("dateRegistered", date, {
+                                shouldValidate: true,
+                              })
+                            }
+                          />
+                        </PopoverContent>
+                      </Popover>
+                    </FormControl>
+                    <FormMessage className="text-xs text-red-400" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="expirationDate"
+                render={({ field }) => (
+                  <FormItem className="lg:col-span-2">
+                    <FormLabel
+                      className={cn(
+                        "text-muted-foreground",
+                        form.formState.errors.expirationDate && "text-red-400"
+                      )}
+                    >
+                      Expiration Date
+                    </FormLabel>
+                    <FormControl>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                "w-full text-left font-normal justify-start",
+                                !field.value && "text-muted-foreground",
+                                form.formState.errors.expirationDate &&
+                                  "border-red-400"
+                              )}
+                            >
+                              <CalendarIcon className="h-4 w-4 opacity-50" />
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+
+                        <PopoverContent
+                          className="w-auto p-2 space-y-2"
+                          align="start"
+                        >
+                          <DatePicker
+                            fieldValue={field.value}
+                            dateValue={(date) =>
+                              form.setValue("expirationDate", date, {
                                 shouldValidate: true,
                               })
                             }
