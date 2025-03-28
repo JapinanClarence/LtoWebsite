@@ -2,7 +2,7 @@ import apiClient from "@/api/axios";
 import { vehicleColumns } from "@/components/table/columns";
 import { useAuth } from "@/context/AuthContext";
 import { createCategoryMap, getFullName } from "@/util/helper";
-import { formatSimpleDate } from "@/util/dateFormatter";
+import { formatDate, formatSimpleDate } from "@/util/dateFormatter";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DriversTable from "@/components/drivers/DriversTable";
@@ -16,6 +16,11 @@ const classificationMap = createCategoryMap({
   2: "Government",
 });
 
+const statusMap = createCategoryMap({
+  0: "Expired",
+  1: "Active",
+});
+
 const VehiclesPage = () => {
   const [vehicleData, setVehicleData] = useState([]);
   const { token } = useAuth();
@@ -24,6 +29,7 @@ const VehiclesPage = () => {
   const [loading, setLoading] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState("");
+  const date = formatDate(Date.now());
 
   useEffect(() => {
     fetchVehicles();
@@ -46,15 +52,16 @@ const VehiclesPage = () => {
 
         return {
           _id: dData._id,
+          owner: owner,
           plateNo: dData.plateNo,
           color: dData.color,
-          owner: owner,
-          dateRegistered: formatSimpleDate(dData.dateRegistered),
-          expirationDate: formatSimpleDate(dData.expirationDate),
           type: dData.type,
           make: dData.make,
           series: dData.series,
           classification: classificationMap.get(dData.classification),
+          dateRegistered: formatSimpleDate(dData.dateRegistered),
+          expirationDate: formatSimpleDate(dData.expirationDate),
+          status: statusMap.get(dData.status),
         };
       });
 
@@ -81,19 +88,28 @@ const VehiclesPage = () => {
     navigate(`/vehicle/${vehicleId}/edit`);
   };
 
-  const handleDeactivate = (data) => {
-    setShowAlert(true);
-    setSelectedVehicle(data);
+  const onUpdateStatus = async ({ vehicleId, newStatus }) => {
+    try {
+      const { data } = await apiClient.patch(
+        `/vehicle/${vehicleId}`,
+        { status: newStatus === "Expired" ? "0" : "1" },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (data.success) {
+        toast.success("Vehicle status updated", {
+          description: date,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const confirmDelete = () => {
-    onDelete(false); // Call the delete function
-    setShowAlert(false); // Close the alert dialog after deleting
-  };
-
-  const cancelDelete = () => {
-    setShowAlert(false); // Close the alert dialog without deleting
-  };
   return (
     <div className="p-4">
       <header className="text-xl md:text-3xl font-bold mb-5">Vehicles</header>
@@ -101,13 +117,13 @@ const VehiclesPage = () => {
         {/* Call vehicle table component */}
         <VehiclesTable
           data={vehicleData}
-          filters={["fullname", "licenseNo"]}
+          filters={["plateNo", "make", "series", "type", "owner", "status"]}
           tableColumn={vehicleColumns}
           onAdd={handleAdd}
           loading={loading}
           onRowClick={onRowClick}
           onEdit={onEdit}
-          onDelete={handleDeactivate}
+          onUpdateStatus={onUpdateStatus}
         />
       </section>
       {/* <ConfirmationDIalog

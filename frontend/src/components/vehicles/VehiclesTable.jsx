@@ -36,6 +36,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { DataTableViewOptions } from "../table/DataTableViewOptions";
 import { DataTablePagination } from "../table/DataTablePagination";
+
 const VehiclesTable = ({
   title,
   filters,
@@ -45,7 +46,7 @@ const VehiclesTable = ({
   onRowClick,
   onAdd,
   onEdit,
-  onDelete,
+  onUpdateStatus,
 }) => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
@@ -60,7 +61,7 @@ const VehiclesTable = ({
 
   const table = useReactTable({
     data,
-    columns: tableColumn(onEdit, onDelete),
+    columns: tableColumn(onEdit, onUpdateStatus),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onPaginationChange: setPagination,
@@ -98,7 +99,7 @@ const VehiclesTable = ({
           placeholder={"Search Vehicle..."}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
-          className={"hidden md:inline md:max-w-sm flex-shrink"}
+          className={"hidden h-8 md:inline md:max-w-sm flex-shrink"}
         />
 
         <div className="flex gap-2 justify-end md:justify-normal md:items-center">

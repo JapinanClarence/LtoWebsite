@@ -59,6 +59,7 @@ export const getVehicle = async (req, res) => {
         dateRegistered: data.dateRegistered,
         expirationDate: data.expirationDate,
         plateNo: data.plateNo,
+        status: data.status
       };
     });
 
@@ -104,6 +105,7 @@ export const findVehicle = async (req, res) => {
       yearModel: vehicle.yearModel,
       dateRegistered: vehicle.dateRegistered,
       expirationDate: vehicle.expirationDate,
+      status: vehicle.status
     };
 
     res.status(200).json({

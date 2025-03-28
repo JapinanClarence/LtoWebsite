@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,8 +10,24 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CopyMinus, Edit, Plus, Trash } from "lucide-react";
+import {
+  CheckCircle2Icon,
+  CircleAlert,
+  CopyMinus,
+  Edit,
+  Plus,
+  Trash,
+} from "lucide-react";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
+import { Badge } from "../ui/badge";
+import apiClient from "@/api/axios";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const deactivatedDriverColumns = (onAction) => [
   {
@@ -207,7 +223,8 @@ export const logs = () => [
     cell: ({ row }) => <div className="">{row.getValue("createdAt")}</div>,
   },
 ];
-export const vehicleColumns = (onEdit, onDelete) => [
+
+export const vehicleColumns = (onEdit, onUpdateStatus) => [
   {
     accessorKey: "plateNo",
     header: "Plate No.",
@@ -252,6 +269,36 @@ export const vehicleColumns = (onEdit, onDelete) => [
     accessorKey: "expirationDate",
     header: "Expiration Date",
     cell: ({ row }) => <div className="">{row.getValue("expirationDate")}</div>,
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const [status, setStatus] = useState(row.original.status);
+      const vehicleId = row.original._id;
+
+      const handleStatusChange = async (newStatus) => {
+        setStatus(newStatus);
+        onUpdateStatus({ vehicleId, newStatus });
+      };
+
+      return (
+        <Select value={status} onValueChange={handleStatusChange}>
+          <SelectTrigger className="justify-start gap-2 h-8 w-28 px-2 [&_svg]:size-4 rounded-sm">
+            {status === "Active" ? (
+              <CheckCircle2Icon className="" />
+            ) : (
+              <CircleAlert className="" />
+            )}
+            {status}
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Active">Active</SelectItem>
+            <SelectItem value="Expired">Expired</SelectItem>
+          </SelectContent>
+        </Select>
+      );
+    },
   },
   {
     id: "actions",
