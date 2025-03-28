@@ -144,6 +144,10 @@ const VehicleCard = () => {
             <p className="font-semibold w-full">
               {formatSimpleDate(vehicleData?.dateRegistered)}
             </p>
+            <h2 className="text-muted-foreground px-6">Expiration Date:</h2>
+            <p className="font-semibold w-full">
+              {formatSimpleDate(vehicleData?.expirationDate)}
+            </p>
           </div>
         </CardContent>
         <CardFooter className="gap-2 text-sm ">
