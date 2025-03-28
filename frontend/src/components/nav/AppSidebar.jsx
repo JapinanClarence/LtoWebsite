@@ -46,6 +46,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
+import { useLocation } from "react-router-dom";
 // This is sample data.
 const data = {
   user: {
@@ -101,6 +102,7 @@ const data = {
 };
 
 export function AppSidebar(props) {
+  const location = useLocation();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -127,8 +129,8 @@ export function AppSidebar(props) {
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarMenu className="">
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+            <SidebarMenuItem >
+              <SidebarMenuButton isActive={location.pathname === "/"} asChild>
                 <a href="/">
                   <SquareTerminal />
                   <span>Dashboard</span>
@@ -136,7 +138,7 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton isActive={location.pathname === "/vehicle"} asChild>
                 <a href="/vehicle">
                   <Car />
                   <span>Manage Vehicles</span>
@@ -144,40 +146,15 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton isActive={location.pathname === "/driver"} asChild>
                 <a href="/driver">
                   <Users />
                   <span>Manage Drivers</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            {/* <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Users />
-                Drivers
-              </SidebarMenuButton>
-              <SidebarMenuSub>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <a href="/driver">
-                      <Dot />
-                      <span> Drivers</span>
-                    </a>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-                <SidebarMenuSubItem>
-                  <SidebarMenuSubButton asChild>
-                    <a href="/driver/create">
-                      <Dot />
-                      <span> Add Driver</span>
-                    </a>
-                  </SidebarMenuSubButton>
-                </SidebarMenuSubItem>
-              </SidebarMenuSub>
-            </SidebarMenuItem> */}
-
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton isActive={location.pathname === "/violation"} asChild>
                 <a href="#">
                   <SquareChartGantt />
                   <span>Manage Violations</span>
@@ -185,7 +162,7 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton isActive={location.pathname === "/accident"} asChild>
                 <a href="#">
                   <SquareActivity />
                   <span>Manage Accidents</span>
@@ -193,11 +170,8 @@ export function AppSidebar(props) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
-          {/* <NavMain items={data.navMain} /> */}
-          {/* <NavProjects projects={data.projects} /> */}
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter>
         <NavUser />
       </SidebarFooter>
