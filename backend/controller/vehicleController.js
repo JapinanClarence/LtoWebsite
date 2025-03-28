@@ -31,7 +31,7 @@ export const createVehicle = async (req, res) => {
 
 export const getVehicle = async (req, res) => {
   try {
-    const vehicles = await VehicleModel.find().sort({createdAt: -1});
+    const vehicles = await VehicleModel.find().sort({ createdAt: -1 });
 
     const vehicleDetails = vehicles.map((data) => {
       return {
@@ -47,7 +47,7 @@ export const getVehicle = async (req, res) => {
         color: data.color,
         yearModel: data.yearModel,
         dateRegistered: data.dateRegistered,
-        plateNo: data.plateNo
+        plateNo: data.plateNo,
       };
     });
 
@@ -63,23 +63,23 @@ export const getVehicle = async (req, res) => {
   }
 };
 
-export const findVehicle = async (req, res) =>{
+export const findVehicle = async (req, res) => {
   const vehicleId = req.params.id;
   try {
     const vehicle = await VehicleModel.findById(vehicleId);
 
-    if(!vehicle){
+    if (!vehicle) {
       return res.status(404).json({
-        success:false,
-        message: "Vehicle not found"
-      })
+        success: false,
+        message: "Vehicle not found",
+      });
     }
 
     const vehicleDetails = {
       _id: vehicle._id,
       plateNo: vehicle.plateNo,
       fileNo: vehicle.fileNo,
-      owner:  vehicle.owner,
+      owner: vehicle.owner,
       encumbrance: vehicle.encumbrance,
       vehicleType: vehicle.vehicleType,
       classification: vehicle.classification,
@@ -92,41 +92,41 @@ export const findVehicle = async (req, res) =>{
       color: vehicle.color,
       yearModel: vehicle.yearModel,
       dateRegistered: vehicle.dateRegistered,
-    }
+    };
 
     res.status(200).json({
       success: true,
-      data: vehicleDetails
-    })
-
+      data: vehicleDetails,
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
       message: err.message,
     });
   }
-}
+};
 
-export const updateVehicle = async (req, res) =>{
+export const updateVehicle = async (req, res) => {
   const vehicleId = req.params.id;
+  console.log(req.body);
   try {
-    const vehicle = await VehicleModel.findById(vehicleId);
+    const vehicle = await VehicleModel.findByIdAndUpdate(vehicleId, req.body);
 
-    if(!vehicle){
+    if (!vehicle) {
       return res.status(404).json({
         success: false,
-        message:"Vehicle not found"
-      })
+        message: "Vehicle not found",
+      });
     }
 
     res.status(200).json({
       success: true,
-      message: "Vehicle updated"
-    })
+      message: "Vehicle updated",
+    });
   } catch (err) {
     return res.status(500).json({
       success: false,
       message: err.message,
     });
   }
-}
+};

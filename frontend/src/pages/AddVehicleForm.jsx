@@ -52,7 +52,6 @@ const AddVehicleForm = () => {
   });
 
   const onSubmit = async (formData) => {
-
     setIsSubmitting(true);
     try {
       const content = {
@@ -86,7 +85,7 @@ const AddVehicleForm = () => {
         yearModel: formData.yearModel,
         dateRegistered: formData.dateRegistered,
       };
-  
+
       const { data } = await apiClient.post("/vehicle", content, {
         headers: {
           Authorization: token,
@@ -97,16 +96,18 @@ const AddVehicleForm = () => {
         toast.success("Vehicle has been added", {
           description: date,
         });
-        setIsSubmitting(false);
+
         form.reset();
       }
     } catch (error) {
       console.log(error);
       const message = error.response.data.message;
-      setIsSubmitting(false);
+
       toast.error(message, {
         description: `${date}`,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

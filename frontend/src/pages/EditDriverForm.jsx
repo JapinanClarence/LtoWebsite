@@ -122,19 +122,20 @@ const EditDriverForm = () => {
       });
 
       if (data.success) {
-        toast.success("Driver has been updated", {
+        toast.success("Driver updated", {
           description: date,
         });
-        setIsSubmitting(false);
         fetchData();
       }
     } catch (error) {
       console.log(error);
       const message = error.response.data.message;
-      setIsSubmitting(false);
+
       toast.error(message, {
         description: `${date}`,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (

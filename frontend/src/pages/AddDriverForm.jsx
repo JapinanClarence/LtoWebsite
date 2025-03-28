@@ -78,16 +78,18 @@ const AddDriverForm = () => {
         toast.success("Driver has been added", {
           description: date,
         });
-        setIsSubmitting(false);
+
         form.reset();
       }
     } catch (error) {
       console.log(error);
       const message = error.response.data.message;
-      setIsSubmitting(false);
+
       toast.error(message, {
         description: `${date}`,
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
@@ -103,7 +105,11 @@ const AddDriverForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <FormComponent form={form} onSubmit={onSubmit} submitting={submitting}/>
+          <FormComponent
+            form={form}
+            onSubmit={onSubmit}
+            submitting={submitting}
+          />
         </CardContent>
       </Card>
     </>

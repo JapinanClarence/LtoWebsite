@@ -15,6 +15,7 @@ import DeactivatedDriversPage from "./pages/DeactivatedDriversPage";
 import VehiclesPage from "./pages/VehiclesPage";
 import AddVehicleForm from "./pages/AddVehicleForm";
 import VehicleProfile from "./pages/VehicleProfile";
+import EditVehicleForm from "./pages/EditVehicleForm";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
               <Route path="/vehicle" element={<VehiclesPage />} />
               <Route path="/vehicle/create" element={<AddVehicleForm/>}/>
               <Route path="/vehicle/:id" element={<VehicleProfile />} />
+              <Route path="/vehicle/:id/edit" element={<EditVehicleForm />} />
             </Route>
           </Route>
         </Route>
