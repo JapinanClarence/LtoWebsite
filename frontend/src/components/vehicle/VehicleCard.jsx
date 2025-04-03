@@ -93,11 +93,11 @@ const VehicleCard = () => {
             <h1 className="font-bold col-span-2 border-y px-6 py-1">Documentation</h1>
             <h2 className="text-muted-foreground px-6">Enumbrance:</h2>
             <p className="font-semibold w-full">
-              {vehicleData?.encumbrance || "Null"}
+              {vehicleData?.encumbrance || "N/A"}
             </p>
             <h2 className="text-muted-foreground px-6">File Number:</h2>
             <p className="font-semibold w-full">
-              {vehicleData?.fileNo || "Null"}
+              {vehicleData?.fileNo || "N/A"}
             </p>
             <h2 className="text-muted-foreground px-6">Vehicle Type:</h2>
             <p className="font-semibold w-full">{vehicleData?.vehicleType}</p>
