@@ -100,7 +100,7 @@ const DeactivatedDriversPage = () => {
         const message = error.response?.data?.message || "An error occurred";
         throw new Error(message); // Reject with error for toast error message
       } finally {
-        fetchDrivers();
+       await fetchDrivers();
       }
     };
 
