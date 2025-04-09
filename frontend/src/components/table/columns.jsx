@@ -224,7 +224,7 @@ export const logs = () => [
   },
 ];
 
-export const vehicleColumns = (onEdit, onUpdateStatus) => [
+export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
   {
     accessorKey: "plateNo",
     header: "Plate No.",
@@ -283,7 +283,7 @@ export const vehicleColumns = (onEdit, onUpdateStatus) => [
       };
 
       return (
-        <Select value={status} onValueChange={handleStatusChange}>
+        <Select value={status} onValueChange={handleStatusChange} disabled={submitting}>
           <SelectTrigger className="justify-start gap-2 h-8 w-28 px-2 [&_svg]:size-4 rounded-sm">
             {status === "Active" ? (
               <CheckCircle2Icon className="" />

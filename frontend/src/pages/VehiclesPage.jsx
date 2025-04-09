@@ -30,6 +30,7 @@ const VehiclesPage = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState("");
   const date = formatDate(Date.now());
+  const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     fetchVehicles();
@@ -89,25 +90,32 @@ const VehiclesPage = () => {
   };
 
   const onUpdateStatus = async ({ vehicleId, newStatus }) => {
-    try {
-      const { data } = await apiClient.patch(
-        `/vehicle/${vehicleId}`,
-        { status: newStatus === "Expired" ? "0" : "1" },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-
-      if (data.success) {
-        toast.success("Vehicle status updated", {
-          description: date,
-        });
+    const promise = async () => {
+      setIsSubmitting(true)
+      try {
+        const { data } = await apiClient.patch(
+          `/vehicle/${vehicleId}`,
+          { status: newStatus === "Expired" ? "0" : "1" },
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        await fetchVehicles();
+        return data;
+      } catch (error) {
+        console.log(error);
+      } finally{
+        setIsSubmitting(false)
       }
-    } catch (error) {
-      console.log(error);
-    }
+    };
+
+    toast.promise(promise(), {
+      loading: "Updating Status...",
+      success: `Vehicle status updated`,
+      error: (error) => error.message || "Failed to update driver",
+    });
   };
 
   return (
@@ -124,6 +132,7 @@ const VehiclesPage = () => {
           onRowClick={onRowClick}
           onEdit={onEdit}
           onUpdateStatus={onUpdateStatus}
+          submitting={submitting}
         />
       </section>
       {/* <ConfirmationDIalog
