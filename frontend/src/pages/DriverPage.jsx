@@ -71,6 +71,10 @@ const DriverPage = () => {
     navigate(`/driver/${data._id}`);
   };
 
+  const onEdit = (driverId) => {
+    navigate(`/driver/${driverId}/edit`);
+  };
+
   const handleNavigate = () => {
     navigate(`${location.pathname}/inactive`);
   };
@@ -130,6 +134,7 @@ const DriverPage = () => {
           onAdd={handleAdd}
           loading={loading}
           onRowClick={onManage}
+          onEdit={onEdit}
           onDelete={handleDeactivate}
           onNavigate={handleNavigate}
         />

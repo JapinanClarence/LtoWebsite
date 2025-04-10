@@ -98,7 +98,7 @@ export const deactivatedDriverColumns = (onAction) => [
   },
 ];
 
-export const driverColumns = ( onDelete) => [
+export const driverColumns = (onEdit, onDelete) => [
   {
     accessorKey: "licenseNo",
     header: "License No.",
@@ -141,10 +141,10 @@ export const driverColumns = ( onDelete) => [
     enableHiding: false,
     cell: ({ row }) => {
       const driver = row.original;
-      // const handleManage = (e) => {
-      //   e.stopPropagation();
-      //   onManage(driver._id);
-      // };
+      const handleEdit = (e) => {
+        e.stopPropagation();
+        onEdit(driver._id);
+      };
 
       const handleDelete = (e) => {
         e.stopPropagation();
@@ -160,13 +160,11 @@ export const driverColumns = ( onDelete) => [
           </DropdownMenuTrigger>
           <DropdownMenuContent className="text-xs" align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            {/* <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(driver._id)}
-            >
-              Copy Driver ID
-            </DropdownMenuItem> */}
-            {/* <DropdownMenuItem onClick={handleManage}>Manage</DropdownMenuItem> */}
             <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleEdit}>
+              Edit <Edit />
+            </DropdownMenuItem>
+
             <DropdownMenuItem onClick={handleDelete}>
               Deactivate
               <Trash />
@@ -283,7 +281,11 @@ export const vehicleColumns = (onEdit, onUpdateStatus, submitting) => [
       };
 
       return (
-        <Select value={status} onValueChange={handleStatusChange} disabled={submitting}>
+        <Select
+          value={status}
+          onValueChange={handleStatusChange}
+          disabled={submitting}
+        >
           <SelectTrigger className="justify-start gap-2 h-8 w-28 px-2 [&_svg]:size-4 rounded-sm">
             {status === "Active" ? (
               <CheckCircle2Icon className="" />
