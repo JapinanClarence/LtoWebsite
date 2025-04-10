@@ -98,7 +98,7 @@ export const deactivatedDriverColumns = (onAction) => [
   },
 ];
 
-export const driverColumns = (onManage, onDelete) => [
+export const driverColumns = ( onDelete) => [
   {
     accessorKey: "licenseNo",
     header: "License No.",
@@ -141,10 +141,10 @@ export const driverColumns = (onManage, onDelete) => [
     enableHiding: false,
     cell: ({ row }) => {
       const driver = row.original;
-      const handleManage = (e) => {
-        e.stopPropagation();
-        onManage(driver._id);
-      };
+      // const handleManage = (e) => {
+      //   e.stopPropagation();
+      //   onManage(driver._id);
+      // };
 
       const handleDelete = (e) => {
         e.stopPropagation();
@@ -165,7 +165,7 @@ export const driverColumns = (onManage, onDelete) => [
             >
               Copy Driver ID
             </DropdownMenuItem> */}
-            <DropdownMenuItem onClick={handleManage}>Manage</DropdownMenuItem>
+            {/* <DropdownMenuItem onClick={handleManage}>Manage</DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleDelete}>
               Deactivate

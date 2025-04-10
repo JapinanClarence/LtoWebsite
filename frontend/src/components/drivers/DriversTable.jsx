@@ -41,7 +41,7 @@ const DriversTable = ({
   loading,
   onNavigate,
   onAdd,
-  onManage,
+  onRowClick,
   onDelete
 }) => {
   const [sorting, setSorting] = React.useState([]);
@@ -57,7 +57,7 @@ const DriversTable = ({
 
   const table = useReactTable({
     data,
-    columns: tableColumn(onManage, onDelete),
+    columns: tableColumn( onDelete),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onPaginationChange: setPagination,
@@ -144,6 +144,7 @@ const DriversTable = ({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  onClick={() => onRowClick(row.original)}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (

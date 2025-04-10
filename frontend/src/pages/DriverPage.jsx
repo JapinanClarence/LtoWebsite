@@ -67,8 +67,8 @@ const DriverPage = () => {
     navigate(`${location.pathname}/create`);
   };
 
-  const onManage = (id) => {
-    navigate(`/driver/${id}`);
+  const onManage = (data) => {
+    navigate(`/driver/${data._id}`);
   };
 
   const handleNavigate = () => {
@@ -129,7 +129,7 @@ const DriverPage = () => {
           tableColumn={driverColumns}
           onAdd={handleAdd}
           loading={loading}
-          onManage={onManage}
+          onRowClick={onManage}
           onDelete={handleDeactivate}
           onNavigate={handleNavigate}
         />

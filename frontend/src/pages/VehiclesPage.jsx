@@ -9,6 +9,7 @@ import DriversTable from "@/components/drivers/DriversTable";
 import ConfirmationDIalog from "@/components/dialog/ConfirmationDIalog";
 import { toast } from "sonner";
 import VehiclesTable from "@/components/vehicles/VehiclesTable";
+import { X } from "lucide-react";
 
 const classificationMap = createCategoryMap({
   0: "Private",
@@ -110,7 +111,6 @@ const VehiclesPage = () => {
         setIsSubmitting(false)
       }
     };
-
     toast.promise(promise(), {
       loading: "Updating Status...",
       success: `Vehicle status updated`,

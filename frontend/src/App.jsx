@@ -20,7 +20,7 @@ import EditVehicleForm from "./pages/EditVehicleForm";
 function App() {
   return (
     <>
-      <Toaster closeButton />
+      <Toaster closeButton/>
       <Routes>
         <Route path="/">
           <Route path="/" element={<MainLayout />}>
